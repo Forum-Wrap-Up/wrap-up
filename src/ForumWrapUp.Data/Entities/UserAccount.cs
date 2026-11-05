@@ -26,8 +26,11 @@ public sealed class UserAccount
     /// <summary>Data di creazione dell'account locale in UTC.</summary>
     public DateTime CreatedAtUtc { get; set; }
 
-    /// <summary>Data in UTC in cui e stato verificato il controllo del profilo forum.</summary>
+    /// <summary>Data in UTC in cui e stato verificato o attestato dall'amministratore il controllo del profilo forum.</summary>
     public DateTime ProfileVerifiedAtUtc { get; set; }
+
+    /// <summary>Indica se l'account puo accedere alle funzionalita riservate agli utenti.</summary>
+    public bool IsActive { get; set; } = true;
 
     /// <summary>Data dell'ultimo login locale in UTC; nulla se non ancora registrata.</summary>
     public DateTime? LastLoginAtUtc { get; set; }

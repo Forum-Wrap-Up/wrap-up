@@ -1,8 +1,11 @@
 using ForumWrapUp.Data;
+using ForumWrapUp.Data.Entities;
 using ForumWrapUp.Importing;
 using ForumWrapUp.Importing.ForumFree;
 using ForumWrapUp.Web.ForumFree;
 using ForumWrapUp.Web.Security;
+using ForumWrapUp.Web.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace ForumWrapUp.Web;
 
@@ -16,6 +19,8 @@ public sealed class Program
         builder.Services.AddForumWrapUpImporting(builder.Configuration);
         builder.Services.AddSingleton<IForumApiCookieProvider, ConfigurationForumApiCookieProvider>();
         builder.Services.AddAdminApiAuthentication(builder.Configuration);
+        builder.Services.AddSingleton<IPasswordHasher<UserAccount>, PasswordHasher<UserAccount>>();
+        builder.Services.AddScoped<UserAccountService>();
 
         string? connectionString = builder.Configuration.GetConnectionString("ForumWrapUp");
         if (!string.IsNullOrWhiteSpace(connectionString))

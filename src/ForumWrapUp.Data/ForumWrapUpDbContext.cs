@@ -41,6 +41,7 @@ public sealed class ForumWrapUpDbContext : DbContext
             entity.Property(account => account.Nickname).HasMaxLength(100);
             entity.Property(account => account.AvatarUrl).HasMaxLength(2048);
             entity.Property(account => account.PasswordHash).HasMaxLength(512).IsRequired();
+            entity.Property(account => account.IsActive).HasDefaultValue(true);
             entity.Property(account => account.CreatedAtUtc).HasColumnType("timestamp with time zone");
             entity.Property(account => account.ForumRegisteredAtUtc).HasColumnType("timestamp with time zone");
             entity.Property(account => account.ProfileVerifiedAtUtc).HasColumnType("timestamp with time zone");

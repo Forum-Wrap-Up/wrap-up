@@ -19,10 +19,12 @@ public sealed class ForumImportOperationManager
 
     public async Task<ImportOperation> CreateQueuedAsync(int mid, DateOnly fromDate, DateOnly toDate, CancellationToken cancellationToken)
     {
-        bool userExists = await _dbContext.UserAccounts.AnyAsync(account => account.Mid == mid, cancellationToken);
+        bool userExists = await _dbContext.UserAccounts.AnyAsync(
+            account => account.Mid == mid && account.IsActive,
+            cancellationToken);
 
         if (!userExists)
-            throw new KeyNotFoundException($"No local account exists for MID {mid}.");
+            throw new KeyNotFoundException($"No active local account exists for MID {mid}.");
 
         ImportOperation operation = new()
         {

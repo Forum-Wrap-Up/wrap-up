@@ -60,6 +60,17 @@ In produzione configurare la stessa chiave tramite il secret storage scelto per 
 
 Le API amministrative richiedono un token nell'header HTTP `Authorization`, usando lo schema Bearer esclusivamente su HTTPS. Configurare il token fuori dal repository, ad esempio tramite la variabile d'ambiente `AdminApi__Token`; il token è distinto dal login degli utenti e non va inserito in query string o log.
 
+## Gestione amministrativa degli utenti
+
+Tutti gli endpoint seguenti richiedono l'autenticazione amministrativa:
+
+- `GET /api/admin/users` elenca gli account; `GET /api/admin/users/{mid}` legge un account. Le risposte non includono mai l'hash della password.
+- `POST /api/admin/users` crea un account per MID e attesta la verifica del profilo da parte dell'amministratore; il body contiene `mid` e `password`. La password (almeno 12 caratteri) viene hashata lato server.
+- `PUT /api/admin/users/{mid}/password` reimposta la password, sempre hashata lato server.
+- `DELETE /api/admin/users/{mid}` disattiva l'account senza eliminare dati associati; `POST /api/admin/users/{mid}/restore` lo riattiva.
+
+Gli account disattivati non sono ammessi a nuove importazioni. Il modello EF include lo stato `IsActive`; la migrazione iniziale deve includere questa proprietà.
+
 ## Mappatura delle risposte ForumFree.NET
 
 I payload di riferimento sono in `C:\Repos\Other\Personal\ForumFree.NET\payload`; i DTO consumati dal package sono nel repository ForumFree.NET, non duplicati nel progetto Data.
