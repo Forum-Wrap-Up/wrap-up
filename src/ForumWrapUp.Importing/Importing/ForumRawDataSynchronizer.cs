@@ -2,6 +2,7 @@ using ForumWrapUp.Data;
 using ForumWrapUp.Data.Entities;
 using ForumWrapUp.Data.Entities.Raw;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace ForumWrapUp.Importing;
 
@@ -20,7 +21,7 @@ public sealed class ForumRawDataSynchronizer
 
     public async Task SynchronizeAsync(ImportOperation operation, ForumPostImportBatch batch, ForumImportDateRange dateRange, CancellationToken cancellationToken)
     {
-        await using Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction transaction =
+        await using IDbContextTransaction transaction =
             await _dbContext.Database.BeginTransactionAsync(cancellationToken);
 
         UserAccount? user = await _dbContext.UserAccounts

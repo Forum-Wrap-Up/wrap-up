@@ -22,6 +22,8 @@ public sealed class ForumPostPageImporter
             throw new InvalidOperationException("ForumApi:MaximumPageDelay cannot be negative.");
     }
 
+    // Scarica le pagine necessarie all'intervallo senza percorrerle tutte: l'API ordina sempre dal più recente
+    // al più vecchio, quindi oltre il limite inferiore non possono più esserci post rilevanti.
     public async Task<ForumPostImportBatch> FetchAsync(ImportOperation operation, ForumImportDateRange dateRange, CancellationToken cancellationToken)
     {
         Dictionary<int, ApiPost> postsInRange = [];
@@ -47,9 +49,16 @@ public sealed class ForumPostPageImporter
             if (response.Member is not null && response.Member.Id != operation.Mid)
                 throw new InvalidDataException("The forum API returned posts for a different MID.");
 
+            // La pagina può contenere post fuori intervallo: la data più vecchia serve a capire se le pagine
+            // successive sono già oltre il limite inferiore e vanno evitate.
+            DateTime? oldestPublishedAtUtc = null;
+
             foreach (ApiPost post in response.Posts)
             {
                 DateTime publishedAtUtc = post.Date.UtcDateTime;
+                if (oldestPublishedAtUtc is null || publishedAtUtc < oldestPublishedAtUtc.Value)
+                    oldestPublishedAtUtc = publishedAtUtc;
+
                 if (publishedAtUtc < dateRange.FromUtc || publishedAtUtc >= dateRange.ToUtcExclusive)
                     continue;
 
@@ -61,6 +70,12 @@ public sealed class ForumPostPageImporter
             if (expectedPages == 0 || pageNumber >= expectedPages.Value)
                 break;
 
+            // L'API applica un order by fisso e non modificabile, dal più recente al più vecchio: appena la pagina
+            // scende sotto From, le successive non possono contenere post dell'intervallo. Fermarsi qui evita
+            // chiamate inutili (e i relativi ritardi casuali) quando si importa un periodo già passato.
+            if (oldestPublishedAtUtc.HasValue && oldestPublishedAtUtc.Value < dateRange.FromUtc)
+                break;
+
             await DelayBeforeNextPageAsync(cancellationToken);
             pageNumber++;
         }
@@ -68,9 +83,7 @@ public sealed class ForumPostPageImporter
         if (!apiForumId.HasValue)
             throw new InvalidDataException("The forum API did not identify the source forum.");
 
-        return new ForumPostImportBatch(
-            apiForumId.Value,
-            postsInRange);
+        return new ForumPostImportBatch(apiForumId.Value, postsInRange);
     }
 
     private static void ValidatePage(UserPostsResponse response, int requestedPage, int? expectedPages, int? expectedTotal, int? apiForumId)

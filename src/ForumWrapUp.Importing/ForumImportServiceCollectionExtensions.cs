@@ -11,6 +11,7 @@ public static class ForumImportServiceCollectionExtensions
     public static IServiceCollection AddForumWrapUpImporting(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<ForumImportApiOptions>(configuration.GetSection(ForumImportApiOptions.SectionName));
+        services.Configure<ForumImportWorkerOptions>(configuration.GetSection(ForumImportWorkerOptions.SectionName));
 
         services.AddTransient<ForumFreeCookieHandler>();
         services.AddHttpClient<ForumFreeClient>((serviceProvider, client) =>

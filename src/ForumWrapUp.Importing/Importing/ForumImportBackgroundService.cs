@@ -2,21 +2,27 @@ using ForumWrapUp.Data.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace ForumWrapUp.Importing;
 
 public sealed class ForumImportBackgroundService : BackgroundService
 {
-    private static readonly TimeSpan QueueCheckInterval = TimeSpan.FromSeconds(2);
-
     // Il worker è singleton: apre uno scope per ciclo, così i servizi scoped e il DbContext non vivono quanto il worker.
     private readonly IServiceScopeFactory _serviceScopeFactory;
     private readonly ILogger<ForumImportBackgroundService> _logger;
+    private readonly TimeSpan _queueCheckInterval;
 
-    public ForumImportBackgroundService(IServiceScopeFactory serviceScopeFactory, ILogger<ForumImportBackgroundService> logger)
+    public ForumImportBackgroundService(IServiceScopeFactory serviceScopeFactory, IOptions<ForumImportWorkerOptions> options, ILogger<ForumImportBackgroundService> logger)
     {
         _serviceScopeFactory = serviceScopeFactory;
         _logger = logger;
+
+        TimeSpan queueCheckInterval = options.Value.QueueCheckInterval;
+        if (queueCheckInterval <= TimeSpan.Zero)
+            throw new InvalidOperationException("ForumImport:QueueCheckInterval must be a positive time span.");
+
+        _queueCheckInterval = queueCheckInterval;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -66,7 +72,7 @@ public sealed class ForumImportBackgroundService : BackgroundService
             }
 
             if (!operationProcessed)
-                await Task.Delay(QueueCheckInterval, stoppingToken);
+                await Task.Delay(_queueCheckInterval, stoppingToken);
         }
     }
 
