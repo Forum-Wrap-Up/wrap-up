@@ -4,8 +4,9 @@ Applicazione web ASP.NET Core per la generazione del wrap-up annuale dei post Fo
 
 ## Progetti
 
-- `src/ForumWrapUp.Web`: applicazione MVC e integrazione con ForumFree.NET.
+- `src/ForumWrapUp.Web`: applicazione MVC.
 - `src/ForumWrapUp.Data`: entità EF Core, `DbContext` e configurazione PostgreSQL.
+- `src/ForumWrapUp.Importing`: integrazione ForumFree.NET e logiche di importazione dei dati raw.
 
 Il modello EF è la fonte del modello relazionale. Durante la validazione si modificano solo le entità e la configurazione: non sono presenti migrazioni o snapshot. La prima migrazione sarà generata dopo l'approvazione del modello.
 
@@ -44,6 +45,20 @@ Le tabelle `forum_instances`, `forum_sections`, `forum_topics` e `forum_posts` a
 - anni abilitati, riepiloghi annuali e statistiche giornaliere.
 
 Le date dei post sono archiviate in UTC. La conversione al giorno locale `Europe/Rome` per le statistiche appartiene alla logica applicativa.
+
+## Importazione dei dati raw
+
+L'API amministrativa `POST /api/admin/imports` accoda l'importazione raw per MID e intervallo (`fromDate`/`toDate`, formato `YYYY-MM-DD`) e restituisce `202 Accepted` con l'ID e l'URL per consultare lo stato. `GET /api/admin/imports/{operationId}` restituisce stato e progresso. Le date sono inclusive nel fuso `Europe/Rome`; il worker è eseguito nella stessa applicazione e processa una sola operazione alla volta. Questa fase non genera le aggregazioni annuali.
+
+Configurare `ForumApi:ForumUri` con l'URI assoluto della root del forum e, facoltativamente, `ForumApi:MaximumPageDelay` con un intervallo massimo (formato `TimeSpan`, ad esempio `00:05:00`). Il cookie è letto dal provider `IForumApiCookieProvider` tramite la chiave di configurazione `ForumApi:Cookie`. In sviluppo, WebApplication carica .NET User Secrets quando l'ambiente è `Development`; impostare il valore senza inserirlo nei file versionati:
+
+```powershell
+dotnet user-secrets set "ForumApi:Cookie" "<cookie value>" --project src\ForumWrapUp.Web\ForumWrapUp.Web.csproj
+```
+
+In produzione configurare la stessa chiave tramite il secret storage scelto per l'hosting, ad esempio la variabile d'ambiente `ForumApi__Cookie`.
+
+Le API amministrative richiedono un token nell'header HTTP `Authorization`, usando lo schema Bearer esclusivamente su HTTPS. Configurare il token fuori dal repository, ad esempio tramite la variabile d'ambiente `AdminApi__Token`; il token è distinto dal login degli utenti e non va inserito in query string o log.
 
 ## Mappatura delle risposte ForumFree.NET
 

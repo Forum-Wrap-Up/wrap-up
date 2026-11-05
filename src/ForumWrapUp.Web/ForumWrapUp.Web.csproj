@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>4b86ec36-ad93-45cf-beee-c883d524fef1</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ForumWrapUp.Importing\ForumWrapUp.Importing.csproj" />
     <ProjectReference Include="..\ForumWrapUp.Data\ForumWrapUp.Data.csproj" />
   </ItemGroup>
 

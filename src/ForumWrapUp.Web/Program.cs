@@ -1,4 +1,8 @@
 using ForumWrapUp.Data;
+using ForumWrapUp.Importing;
+using ForumWrapUp.Importing.ForumFree;
+using ForumWrapUp.Web.ForumFree;
+using ForumWrapUp.Web.Security;
 
 namespace ForumWrapUp.Web;
 
@@ -9,10 +13,16 @@ public sealed class Program
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddControllersWithViews();
+        builder.Services.AddForumWrapUpImporting(builder.Configuration);
+        builder.Services.AddSingleton<IForumApiCookieProvider, ConfigurationForumApiCookieProvider>();
+        builder.Services.AddAdminApiAuthentication(builder.Configuration);
 
         string? connectionString = builder.Configuration.GetConnectionString("ForumWrapUp");
         if (!string.IsNullOrWhiteSpace(connectionString))
+        {
             builder.Services.AddForumWrapUpData(connectionString);
+            builder.Services.AddHostedService<ForumImportBackgroundService>();
+        }
 
         WebApplication app = builder.Build();
 
@@ -24,9 +34,13 @@ public sealed class Program
 
         app.UseHttpsRedirection();
         app.UseRouting();
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapStaticAssets();
+
+        if (!string.IsNullOrWhiteSpace(connectionString))
+            app.MapControllers();
 
         app.MapControllerRoute(
             name: "default",

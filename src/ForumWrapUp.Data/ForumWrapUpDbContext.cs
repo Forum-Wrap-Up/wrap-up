@@ -4,9 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ForumWrapUp.Data;
 
-public sealed class ForumWrapUpDbContext(DbContextOptions<ForumWrapUpDbContext> options)
-    : DbContext(options)
+public sealed class ForumWrapUpDbContext : DbContext
 {
+    public ForumWrapUpDbContext(DbContextOptions<ForumWrapUpDbContext> options)
+        : base(options)
+    {
+    }
+
     public DbSet<UserAccount> UserAccounts => Set<UserAccount>();
 
     public DbSet<RegistrationAttempt> RegistrationAttempts => Set<RegistrationAttempt>();

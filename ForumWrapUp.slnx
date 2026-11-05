@@ -4,8 +4,12 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/ForumWrapUp.Data/ForumWrapUp.Data.csproj" />
+    <Project Path="src/ForumWrapUp.Importing/ForumWrapUp.Importing.csproj" />
     <Project Path="src/ForumWrapUp.Web/ForumWrapUp.Web.csproj" />
   </Folder>
 </Solution>

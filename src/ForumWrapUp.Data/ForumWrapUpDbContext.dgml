@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+<Node Id="IModel" Label="ForumWrapUpDbContext" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" PropertyAccessMode="PropertyAccessMode.Default" ProductVersion="10.0.4" Annotations="BaseTypeDiscoveryConvention:DerivedTypes: System.Collections.Generic.Dictionary`2[System.Type,System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.IConventionEntityType]]
+InversePropertyAttributeConvention:InverseNavigations: System.Collections.Generic.Dictionary`2[System.Type,System.Collections.Generic.SortedSet`1[System.Type]]
+NonNullableConventionState: System.Reflection.NullabilityInfoContext
+Npgsql:ValueGenerationStrategy: IdentityByDefaultColumn
+Relational:MaxIdentifierLength: 63" Category="Model" Group="Expanded" />
+<Node Id = "AnnualWrapUp" Label="AnnualWrapUp" Name="AnnualWrapUp" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="Relational:Schema:
+Relational:TableName: annual_wrap_ups
+RelationshipDiscoveryConvention:NavigationCandidates: Microsoft.EntityFrameworkCore.Utilities.OrderedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" Category="EntityType" Group="Expanded" />
+<Node Id = "DailyPostStatistic" Label="DailyPostStatistic" Name="DailyPostStatistic" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="Relational:Schema:
+Relational:TableName: daily_post_statistics
+RelationshipDiscoveryConvention:NavigationCandidates: Microsoft.EntityFrameworkCore.Utilities.OrderedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" Category="EntityType" Group="Expanded" />
+<Node Id = "AnnualWrapUp.Mid" Label="Mid (int)" Name="Mid" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="True" IsForeignKey="True" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "AnnualWrapUp.DailyPostStatistics" Label="DailyPostStatistics (*)" Name="DailyPostStatistics" Category="Navigation Collection" Type="ICollection&lt;DailyPostStatistic&gt;"  Field="" Dependent="DailyPostStatistic" Principal="" Inverse="AnnualWrapUp" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "AnnualWrapUp.User" Label="User (1)" Name="User" Category="Navigation Property" Type="UserAccount"  Field="" Dependent="" Principal="UserAccount" Inverse="AnnualWrapUps" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "AnnualWrapUp.WrapUpYear" Label="WrapUpYear (1)" Name="WrapUpYear" Category="Navigation Property" Type="WrapUpYear"  Field="" Dependent="" Principal="WrapUpYear" Inverse="AnnualWrapUps" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "AnnualWrapUp.Year" Label="Year (int)" Name="Year" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="True" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "AnnualWrapUp.CalculatedAtUtc" Label="CalculatedAtUtc (DateTime?)" Name="CalculatedAtUtc" Category="Property Optional" Type="DateTime?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: timestamp with time zone" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "AnnualWrapUp.IsReady" Label="IsReady (bool)" Name="IsReady" Category="Property Required" Type="bool" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "AnnualWrapUp.MostSuccessfulPostContentHtml" Label="MostSuccessfulPostContentHtml (string)" Name="MostSuccessfulPostContentHtml" Category="Property Optional" Type="string" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: text" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "AnnualWrapUp.MostSuccessfulPostDateUtc" Label="MostSuccessfulPostDateUtc (DateTime?)" Name="MostSuccessfulPostDateUtc" Category="Property Optional" Type="DateTime?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: timestamp with time zone" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "AnnualWrapUp.MostSuccessfulPostExternalId" Label="MostSuccessfulPostExternalId (int?)" Name="MostSuccessfulPostExternalId" Category="Property Optional" Type="int?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "AnnualWrapUp.MostSuccessfulPostPoints" Label="MostSuccessfulPostPoints (int?)" Name="MostSuccessfulPostPoints" Category="Property Optional" Type="int?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "AnnualWrapUp.TopTopicExternalId" Label="TopTopicExternalId (int?)" Name="TopTopicExternalId" Category="Property Optional" Type="int?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "AnnualWrapUp.TopTopicPostCount" Label="TopTopicPostCount (int)" Name="TopTopicPostCount" Category="Property Required" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "AnnualWrapUp.TopTopicTitleHtml" Label="TopTopicTitleHtml (string)" Name="TopTopicTitleHtml" Category="Property Optional" Type="string" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: text" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "AnnualWrapUp.TotalPoints" Label="TotalPoints (long)" Name="TotalPoints" Category="Property Required" Type="long" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "AnnualWrapUp.TotalPosts" Label="TotalPosts (int)" Name="TotalPosts" Category="Property Required" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ImportOperation" Label="ImportOperation" Name="ImportOperation" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="Relational:CheckConstraints: System.Collections.Generic.SortedDictionary`2[System.String,Microsoft.EntityFrameworkCore.Metadata.ICheckConstraint]
+Relational:Schema:
+Relational:TableName: import_operations
+RelationshipDiscoveryConvention:NavigationCandidates: Microsoft.EntityFrameworkCore.Utilities.OrderedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" Category="EntityType" Group="Expanded" />
+<Node Id = "DailyPostStatistic.Mid" Label="Mid (int)" Name="Mid" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="True" IsForeignKey="True" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "DailyPostStatistic.AnnualWrapUp" Label="AnnualWrapUp (1)" Name="AnnualWrapUp" Category="Navigation Property" Type="AnnualWrapUp"  Field="" Dependent="" Principal="AnnualWrapUp" Inverse="DailyPostStatistics" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "DailyPostStatistic.Year" Label="Year (int)" Name="Year" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="True" IsForeignKey="True" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "DailyPostStatistic.Day" Label="Day (DateOnly)" Name="Day" Category="Property Primary" Type="DateOnly" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: date" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "DailyPostStatistic.PostCount" Label="PostCount (int)" Name="PostCount" Category="Property Required" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ForumInstance" Label="ForumInstance" Name="ForumInstance" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="Relational:Schema: raw
+Relational:TableName: forum_instances
+RelationshipDiscoveryConvention:NavigationCandidates: Microsoft.EntityFrameworkCore.Utilities.OrderedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" Category="EntityType" Group="Expanded" />
+<Node Id = "ImportOperation.Id" Label="Id (Guid)" Name="Id" Category="Property Primary" Type="Guid" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
+<Node Id = "ImportOperation.User" Label="User (1)" Name="User" Category="Navigation Property" Type="UserAccount"  Field="" Dependent="" Principal="UserAccount" Inverse="ImportOperations" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "ImportOperation.CompletedAtUtc" Label="CompletedAtUtc (DateTime?)" Name="CompletedAtUtc" Category="Property Optional" Type="DateTime?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: timestamp with time zone" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ImportOperation.ErrorMessage" Label="ErrorMessage (string)" Name="ErrorMessage" Category="Property Optional" Type="string" MaxLength="(2000)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 2000" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ImportOperation.FromDate" Label="FromDate (DateOnly)" Name="FromDate" Category="Property Required" Type="DateOnly" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ImportOperation.Mid" Label="Mid (int)" Name="Mid" Category="Property Foreign" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ImportOperation.PagesFetched" Label="PagesFetched (int)" Name="PagesFetched" Category="Property Required" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ImportOperation.PostsFetched" Label="PostsFetched (int)" Name="PostsFetched" Category="Property Required" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ImportOperation.RequestedAtUtc" Label="RequestedAtUtc (DateTime)" Name="RequestedAtUtc" Category="Property Required" Type="DateTime" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: timestamp with time zone" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ImportOperation.StartedAtUtc" Label="StartedAtUtc (DateTime?)" Name="StartedAtUtc" Category="Property Optional" Type="DateTime?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: timestamp with time zone" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ImportOperation.Status" Label="Status (ImportOperationStatus)" Name="Status" Category="Property Required" Type="ImportOperationStatus" MaxLength="(32)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 32
+ProviderClrType: System.String
+ValueConverter:" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ImportOperation.ToDate" Label="ToDate (DateOnly)" Name="ToDate" Category="Property Required" Type="DateOnly" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ImportOperation.TotalPagesExpected" Label="TotalPagesExpected (int?)" Name="TotalPagesExpected" Category="Property Optional" Type="int?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ImportOperation.TotalPostsExpected" Label="TotalPostsExpected (int?)" Name="TotalPostsExpected" Category="Property Optional" Type="int?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ForumPost" Label="ForumPost" Name="ForumPost" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="Relational:Schema: raw
+Relational:TableName: forum_posts
+RelationshipDiscoveryConvention:NavigationCandidates: Microsoft.EntityFrameworkCore.Utilities.OrderedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" Category="EntityType" Group="Expanded" />
+<Node Id = "ForumInstance.ApiForumId" Label="ApiForumId (int)" Name="ApiForumId" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ForumInstance.Posts" Label="Posts (*)" Name="Posts" Category="Navigation Collection" Type="ICollection&lt;ForumPost&gt;"  Field="" Dependent="ForumPost" Principal="" Inverse="ForumInstance" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "ForumInstance.Sections" Label="Sections (*)" Name="Sections" Category="Navigation Collection" Type="ICollection&lt;ForumSection&gt;"  Field="" Dependent="ForumSection" Principal="" Inverse="ForumInstance" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "ForumInstance.Topics" Label="Topics (*)" Name="Topics" Category="Navigation Collection" Type="ICollection&lt;ForumTopic&gt;"  Field="" Dependent="ForumTopic" Principal="" Inverse="ForumInstance" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "ForumSection" Label="ForumSection" Name="ForumSection" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="Relational:Schema: raw
+Relational:TableName: forum_sections
+RelationshipDiscoveryConvention:NavigationCandidates: Microsoft.EntityFrameworkCore.Utilities.OrderedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" Category="EntityType" Group="Expanded" />
+<Node Id = "ForumPost.Id" Label="Id (long)" Name="Id" Category="Property Primary" Type="long" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Npgsql:ValueGenerationStrategy: IdentityByDefaultColumn" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
+<Node Id = "ForumPost.Author" Label="Author (1)" Name="Author" Category="Navigation Property" Type="UserAccount"  Field="" Dependent="" Principal="UserAccount" Inverse="Posts" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "ForumPost.ForumInstance" Label="ForumInstance (1)" Name="ForumInstance" Category="Navigation Property" Type="ForumInstance"  Field="" Dependent="" Principal="ForumInstance" Inverse="Posts" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "ForumPost.Section" Label="Section (1)" Name="Section" Category="Navigation Property" Type="ForumSection"  Field="" Dependent="" Principal="ForumSection" Inverse="Posts" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "ForumPost.Topic" Label="Topic (1)" Name="Topic" Category="Navigation Property" Type="ForumTopic"  Field="" Dependent="" Principal="ForumTopic" Inverse="Posts" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "ForumPost.ApiForumId" Label="ApiForumId (int)" Name="ApiForumId" Category="Property Foreign" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ForumPost.AuthorMid" Label="AuthorMid (int)" Name="AuthorMid" Category="Property Foreign" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ForumPost.ContentHtml" Label="ContentHtml (string)" Name="ContentHtml" Category="Property Optional" Type="string" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: text" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ForumPost.ExternalId" Label="ExternalId (int)" Name="ExternalId" Category="Property Required" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ForumPost.Points" Label="Points (int?)" Name="Points" Category="Property Optional" Type="int?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ForumPost.PublishedAtUtc" Label="PublishedAtUtc (DateTime)" Name="PublishedAtUtc" Category="Property Required" Type="DateTime" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: timestamp with time zone" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ForumPost.RawPoints" Label="RawPoints (string)" Name="RawPoints" Category="Property Optional" Type="string" MaxLength="(64)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 64" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ForumPost.SectionId" Label="SectionId (long?)" Name="SectionId" Category="Property Foreign" Type="long?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="True" IsRequired="False" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ForumPost.TopicId" Label="TopicId (long?)" Name="TopicId" Category="Property Foreign" Type="long?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="True" IsRequired="False" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ForumTopic" Label="ForumTopic" Name="ForumTopic" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="Relational:Schema: raw
+Relational:TableName: forum_topics
+RelationshipDiscoveryConvention:NavigationCandidates: Microsoft.EntityFrameworkCore.Utilities.OrderedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" Category="EntityType" Group="Expanded" />
+<Node Id = "ForumSection.Id" Label="Id (long)" Name="Id" Category="Property Primary" Type="long" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Npgsql:ValueGenerationStrategy: IdentityByDefaultColumn" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
+<Node Id = "ForumSection.ForumInstance" Label="ForumInstance (1)" Name="ForumInstance" Category="Navigation Property" Type="ForumInstance"  Field="" Dependent="" Principal="ForumInstance" Inverse="Sections" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "ForumSection.Posts" Label="Posts (*)" Name="Posts" Category="Navigation Collection" Type="ICollection&lt;ForumPost&gt;"  Field="" Dependent="ForumPost" Principal="" Inverse="Section" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "ForumSection.ApiForumId" Label="ApiForumId (int)" Name="ApiForumId" Category="Property Foreign" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ForumSection.ExternalId" Label="ExternalId (int)" Name="ExternalId" Category="Property Required" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ForumSection.Name" Label="Name (string)" Name="Name" Category="Property Optional" Type="string" MaxLength="(500)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 500" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "RegistrationAttempt" Label="RegistrationAttempt" Name="RegistrationAttempt" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="Relational:Schema:
+Relational:TableName: registration_attempts
+RelationshipDiscoveryConvention:NavigationCandidates: Microsoft.EntityFrameworkCore.Utilities.OrderedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" Category="EntityType" Group="Expanded" />
+<Node Id = "ForumTopic.Id" Label="Id (long)" Name="Id" Category="Property Primary" Type="long" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Npgsql:ValueGenerationStrategy: IdentityByDefaultColumn" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
+<Node Id = "ForumTopic.ForumInstance" Label="ForumInstance (1)" Name="ForumInstance" Category="Navigation Property" Type="ForumInstance"  Field="" Dependent="" Principal="ForumInstance" Inverse="Topics" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "ForumTopic.Posts" Label="Posts (*)" Name="Posts" Category="Navigation Collection" Type="ICollection&lt;ForumPost&gt;"  Field="" Dependent="ForumPost" Principal="" Inverse="Topic" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "ForumTopic.ApiForumId" Label="ApiForumId (int)" Name="ApiForumId" Category="Property Foreign" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ForumTopic.ExternalId" Label="ExternalId (int)" Name="ExternalId" Category="Property Required" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ForumTopic.PostCount" Label="PostCount (int)" Name="PostCount" Category="Property Required" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ForumTopic.TitleHtml" Label="TitleHtml (string)" Name="TitleHtml" Category="Property Optional" Type="string" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: text" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "UserAccount" Label="UserAccount" Name="UserAccount" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="Relational:Schema:
+Relational:TableName: user_accounts
+RelationshipDiscoveryConvention:NavigationCandidates: Microsoft.EntityFrameworkCore.Utilities.OrderedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" Category="EntityType" Group="Expanded" />
+<Node Id = "RegistrationAttempt.Id" Label="Id (Guid)" Name="Id" Category="Property Primary" Type="Guid" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
+<Node Id = "RegistrationAttempt.CreatedAtUtc" Label="CreatedAtUtc (DateTime)" Name="CreatedAtUtc" Category="Property Required" Type="DateTime" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: timestamp with time zone" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "RegistrationAttempt.ExpiresAtUtc" Label="ExpiresAtUtc (DateTime)" Name="ExpiresAtUtc" Category="Property Required" Type="DateTime" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: timestamp with time zone" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "RegistrationAttempt.Mid" Label="Mid (int)" Name="Mid" Category="Property Required" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "RegistrationAttempt.ProfileVerifiedAtUtc" Label="ProfileVerifiedAtUtc (DateTime?)" Name="ProfileVerifiedAtUtc" Category="Property Optional" Type="DateTime?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: timestamp with time zone" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "RegistrationAttempt.VerificationCode" Label="VerificationCode (string)" Name="VerificationCode" Category="Property Required" Type="string" MaxLength="(36)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 36" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "WrapUpYear" Label="WrapUpYear" Name="WrapUpYear" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="Relational:Schema:
+Relational:TableName: wrap_up_years
+RelationshipDiscoveryConvention:NavigationCandidates: Microsoft.EntityFrameworkCore.Utilities.OrderedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" Category="EntityType" Group="Expanded" />
+<Node Id = "UserAccount.Mid" Label="Mid (int)" Name="Mid" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "UserAccount.AnnualWrapUps" Label="AnnualWrapUps (*)" Name="AnnualWrapUps" Category="Navigation Collection" Type="ICollection&lt;AnnualWrapUp&gt;"  Field="" Dependent="AnnualWrapUp" Principal="" Inverse="User" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "UserAccount.ImportOperations" Label="ImportOperations (*)" Name="ImportOperations" Category="Navigation Collection" Type="ICollection&lt;ImportOperation&gt;"  Field="" Dependent="ImportOperation" Principal="" Inverse="User" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "UserAccount.Posts" Label="Posts (*)" Name="Posts" Category="Navigation Collection" Type="ICollection&lt;ForumPost&gt;"  Field="" Dependent="ForumPost" Principal="" Inverse="Author" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "UserAccount.AvatarUrl" Label="AvatarUrl (string)" Name="AvatarUrl" Category="Property Optional" Type="string" MaxLength="(2048)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 2048" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "UserAccount.CreatedAtUtc" Label="CreatedAtUtc (DateTime)" Name="CreatedAtUtc" Category="Property Required" Type="DateTime" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: timestamp with time zone" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "UserAccount.ForumMessageCount" Label="ForumMessageCount (int?)" Name="ForumMessageCount" Category="Property Optional" Type="int?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "UserAccount.ForumRegisteredAtUtc" Label="ForumRegisteredAtUtc (DateTime?)" Name="ForumRegisteredAtUtc" Category="Property Optional" Type="DateTime?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: timestamp with time zone" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "UserAccount.LastLoginAtUtc" Label="LastLoginAtUtc (DateTime?)" Name="LastLoginAtUtc" Category="Property Optional" Type="DateTime?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: timestamp with time zone" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "UserAccount.Nickname" Label="Nickname (string)" Name="Nickname" Category="Property Optional" Type="string" MaxLength="(100)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 100" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "UserAccount.PasswordHash" Label="PasswordHash (string)" Name="PasswordHash" Category="Property Required" Type="string" MaxLength="(512)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 512" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "UserAccount.ProfileVerifiedAtUtc" Label="ProfileVerifiedAtUtc (DateTime)" Name="ProfileVerifiedAtUtc" Category="Property Required" Type="DateTime" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: timestamp with time zone" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "WrapUpYear" Label="WrapUpYear" Name="WrapUpYear" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="" Category="EntityType" Group="Expanded" />
+<Node Id = "WrapUpYear.Year" Label="Year (int)" Name="Year" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "WrapUpYear.AnnualWrapUps" Label="AnnualWrapUps (*)" Name="AnnualWrapUps" Category="Navigation Collection" Type="ICollection&lt;AnnualWrapUp&gt;"  Field="" Dependent="AnnualWrapUp" Principal="" Inverse="WrapUpYear" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "WrapUpYear.CreatedAtUtc" Label="CreatedAtUtc (DateTime)" Name="CreatedAtUtc" Category="Property Required" Type="DateTime" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: timestamp with time zone" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "WrapUpYear.IsEnabled" Label="IsEnabled (bool)" Name="IsEnabled" Category="Property Required" Type="bool" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+  </Nodes>
+  <Links>
+<Link Source = "IModel" Target="AnnualWrapUp" Category="Contains" />
+<Link Source = "IModel" Target="DailyPostStatistic" Category="Contains" />
+<Link Source = "AnnualWrapUp" Target="AnnualWrapUp.DailyPostStatistics" Category="Contains" />
+<Link Source = "AnnualWrapUp" Target="AnnualWrapUp.User" Category="Contains" />
+<Link Source = "AnnualWrapUp" Target="AnnualWrapUp.WrapUpYear" Category="Contains" />
+<Link Source = "AnnualWrapUp" Target="AnnualWrapUp.Mid" Category="Contains" />
+<Link Source="AnnualWrapUp" Target="UserAccount" From="AnnualWrapUp.Mid" To="UserAccount.Mid" Name="AnnualWrapUp -> UserAccount" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source="AnnualWrapUp" Target="WrapUpYear" From="AnnualWrapUp.Year" To="WrapUpYear.Year" Name="AnnualWrapUp -> WrapUpYear" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source = "AnnualWrapUp" Target="AnnualWrapUp.Year" Category="Contains" />
+<Link Source = "AnnualWrapUp" Target="AnnualWrapUp.CalculatedAtUtc" Category="Contains" />
+<Link Source = "AnnualWrapUp" Target="AnnualWrapUp.IsReady" Category="Contains" />
+<Link Source = "AnnualWrapUp" Target="AnnualWrapUp.MostSuccessfulPostContentHtml" Category="Contains" />
+<Link Source = "AnnualWrapUp" Target="AnnualWrapUp.MostSuccessfulPostDateUtc" Category="Contains" />
+<Link Source = "AnnualWrapUp" Target="AnnualWrapUp.MostSuccessfulPostExternalId" Category="Contains" />
+<Link Source = "AnnualWrapUp" Target="AnnualWrapUp.MostSuccessfulPostPoints" Category="Contains" />
+<Link Source = "AnnualWrapUp" Target="AnnualWrapUp.TopTopicExternalId" Category="Contains" />
+<Link Source = "AnnualWrapUp" Target="AnnualWrapUp.TopTopicPostCount" Category="Contains" />
+<Link Source = "AnnualWrapUp" Target="AnnualWrapUp.TopTopicTitleHtml" Category="Contains" />
+<Link Source = "AnnualWrapUp" Target="AnnualWrapUp.TotalPoints" Category="Contains" />
+<Link Source = "AnnualWrapUp" Target="AnnualWrapUp.TotalPosts" Category="Contains" />
+<Link Source = "IModel" Target="ImportOperation" Category="Contains" />
+<Link Source = "DailyPostStatistic" Target="DailyPostStatistic.AnnualWrapUp" Category="Contains" />
+<Link Source = "DailyPostStatistic" Target="DailyPostStatistic.Mid" Category="Contains" />
+<Link Source="DailyPostStatistic" Target="AnnualWrapUp" From="DailyPostStatistic.Mid,Year" To="AnnualWrapUp.Mid,Year" Name="DailyPostStatistic -> AnnualWrapUp" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source = "DailyPostStatistic" Target="DailyPostStatistic.Year" Category="Contains" />
+<Link Source = "DailyPostStatistic" Target="DailyPostStatistic.Day" Category="Contains" />
+<Link Source = "DailyPostStatistic" Target="DailyPostStatistic.PostCount" Category="Contains" />
+<Link Source = "IModel" Target="ForumInstance" Category="Contains" />
+<Link Source = "ImportOperation" Target="ImportOperation.User" Category="Contains" />
+<Link Source = "ImportOperation" Target="ImportOperation.Id" Category="Contains" />
+<Link Source="ImportOperation" Target="UserAccount" From="ImportOperation.Mid" To="UserAccount.Mid" Name="ImportOperation -> UserAccount" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source = "ImportOperation" Target="ImportOperation.CompletedAtUtc" Category="Contains" />
+<Link Source = "ImportOperation" Target="ImportOperation.ErrorMessage" Category="Contains" />
+<Link Source = "ImportOperation" Target="ImportOperation.FromDate" Category="Contains" />
+<Link Source = "ImportOperation" Target="ImportOperation.Mid" Category="Contains" />
+<Link Source = "ImportOperation" Target="ImportOperation.PagesFetched" Category="Contains" />
+<Link Source = "ImportOperation" Target="ImportOperation.PostsFetched" Category="Contains" />
+<Link Source = "ImportOperation" Target="ImportOperation.RequestedAtUtc" Category="Contains" />
+<Link Source = "ImportOperation" Target="ImportOperation.StartedAtUtc" Category="Contains" />
+<Link Source = "ImportOperation" Target="ImportOperation.Status" Category="Contains" />
+<Link Source = "ImportOperation" Target="ImportOperation.ToDate" Category="Contains" />
+<Link Source = "ImportOperation" Target="ImportOperation.TotalPagesExpected" Category="Contains" />
+<Link Source = "ImportOperation" Target="ImportOperation.TotalPostsExpected" Category="Contains" />
+<Link Source = "IModel" Target="ForumPost" Category="Contains" />
+<Link Source = "ForumInstance" Target="ForumInstance.Posts" Category="Contains" />
+<Link Source = "ForumInstance" Target="ForumInstance.Sections" Category="Contains" />
+<Link Source = "ForumInstance" Target="ForumInstance.Topics" Category="Contains" />
+<Link Source = "ForumInstance" Target="ForumInstance.ApiForumId" Category="Contains" />
+<Link Source = "IModel" Target="ForumSection" Category="Contains" />
+<Link Source = "ForumPost" Target="ForumPost.Author" Category="Contains" />
+<Link Source = "ForumPost" Target="ForumPost.ForumInstance" Category="Contains" />
+<Link Source = "ForumPost" Target="ForumPost.Section" Category="Contains" />
+<Link Source = "ForumPost" Target="ForumPost.Topic" Category="Contains" />
+<Link Source = "ForumPost" Target="ForumPost.Id" Category="Contains" />
+<Link Source="ForumPost" Target="ForumInstance" From="ForumPost.ApiForumId" To="ForumInstance.ApiForumId" Name="ForumPost -> ForumInstance" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source="ForumPost" Target="UserAccount" From="ForumPost.AuthorMid" To="UserAccount.Mid" Name="ForumPost -> UserAccount" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source="ForumPost" Target="ForumSection" From="ForumPost.SectionId" To="ForumSection.Id" Name="ForumPost -> ForumSection" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source="ForumPost" Target="ForumTopic" From="ForumPost.TopicId" To="ForumTopic.Id" Name="ForumPost -> ForumTopic" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source = "ForumPost" Target="ForumPost.ApiForumId" Category="Contains" />
+<Link Source = "ForumPost" Target="ForumPost.AuthorMid" Category="Contains" />
+<Link Source = "ForumPost" Target="ForumPost.ContentHtml" Category="Contains" />
+<Link Source = "ForumPost" Target="ForumPost.ExternalId" Category="Contains" />
+<Link Source = "ForumPost" Target="ForumPost.Points" Category="Contains" />
+<Link Source = "ForumPost" Target="ForumPost.PublishedAtUtc" Category="Contains" />
+<Link Source = "ForumPost" Target="ForumPost.RawPoints" Category="Contains" />
+<Link Source = "ForumPost" Target="ForumPost.SectionId" Category="Contains" />
+<Link Source = "ForumPost" Target="ForumPost.TopicId" Category="Contains" />
+<Link Source = "IModel" Target="ForumTopic" Category="Contains" />
+<Link Source = "ForumSection" Target="ForumSection.ForumInstance" Category="Contains" />
+<Link Source = "ForumSection" Target="ForumSection.Posts" Category="Contains" />
+<Link Source = "ForumSection" Target="ForumSection.Id" Category="Contains" />
+<Link Source="ForumSection" Target="ForumInstance" From="ForumSection.ApiForumId" To="ForumInstance.ApiForumId" Name="ForumSection -> ForumInstance" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source = "ForumSection" Target="ForumSection.ApiForumId" Category="Contains" />
+<Link Source = "ForumSection" Target="ForumSection.ExternalId" Category="Contains" />
+<Link Source = "ForumSection" Target="ForumSection.Name" Category="Contains" />
+<Link Source = "IModel" Target="RegistrationAttempt" Category="Contains" />
+<Link Source = "ForumTopic" Target="ForumTopic.ForumInstance" Category="Contains" />
+<Link Source = "ForumTopic" Target="ForumTopic.Posts" Category="Contains" />
+<Link Source = "ForumTopic" Target="ForumTopic.Id" Category="Contains" />
+<Link Source="ForumTopic" Target="ForumInstance" From="ForumTopic.ApiForumId" To="ForumInstance.ApiForumId" Name="ForumTopic -> ForumInstance" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source = "ForumTopic" Target="ForumTopic.ApiForumId" Category="Contains" />
+<Link Source = "ForumTopic" Target="ForumTopic.ExternalId" Category="Contains" />
+<Link Source = "ForumTopic" Target="ForumTopic.PostCount" Category="Contains" />
+<Link Source = "ForumTopic" Target="ForumTopic.TitleHtml" Category="Contains" />
+<Link Source = "IModel" Target="UserAccount" Category="Contains" />
+<Link Source = "RegistrationAttempt" Target="RegistrationAttempt.Id" Category="Contains" />
+<Link Source = "RegistrationAttempt" Target="RegistrationAttempt.CreatedAtUtc" Category="Contains" />
+<Link Source = "RegistrationAttempt" Target="RegistrationAttempt.ExpiresAtUtc" Category="Contains" />
+<Link Source = "RegistrationAttempt" Target="RegistrationAttempt.Mid" Category="Contains" />
+<Link Source = "RegistrationAttempt" Target="RegistrationAttempt.ProfileVerifiedAtUtc" Category="Contains" />
+<Link Source = "RegistrationAttempt" Target="RegistrationAttempt.VerificationCode" Category="Contains" />
+<Link Source = "IModel" Target="WrapUpYear" Category="Contains" />
+<Link Source = "UserAccount" Target="UserAccount.AnnualWrapUps" Category="Contains" />
+<Link Source = "UserAccount" Target="UserAccount.ImportOperations" Category="Contains" />
+<Link Source = "UserAccount" Target="UserAccount.Posts" Category="Contains" />
+<Link Source = "UserAccount" Target="UserAccount.Mid" Category="Contains" />
+<Link Source = "UserAccount" Target="UserAccount.AvatarUrl" Category="Contains" />
+<Link Source = "UserAccount" Target="UserAccount.CreatedAtUtc" Category="Contains" />
+<Link Source = "UserAccount" Target="UserAccount.ForumMessageCount" Category="Contains" />
+<Link Source = "UserAccount" Target="UserAccount.ForumRegisteredAtUtc" Category="Contains" />
+<Link Source = "UserAccount" Target="UserAccount.LastLoginAtUtc" Category="Contains" />
+<Link Source = "UserAccount" Target="UserAccount.Nickname" Category="Contains" />
+<Link Source = "UserAccount" Target="UserAccount.PasswordHash" Category="Contains" />
+<Link Source = "UserAccount" Target="UserAccount.ProfileVerifiedAtUtc" Category="Contains" />
+<Link Source = "IModel" Target="WrapUpYear" Category="Contains" />
+<Link Source = "WrapUpYear" Target="WrapUpYear.AnnualWrapUps" Category="Contains" />
+<Link Source = "WrapUpYear" Target="WrapUpYear.Year" Category="Contains" />
+<Link Source = "WrapUpYear" Target="WrapUpYear.CreatedAtUtc" Category="Contains" />
+<Link Source = "WrapUpYear" Target="WrapUpYear.IsEnabled" Category="Contains" />
+  </Links>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="EntityType" ValueLabel="True">
+      <Condition Expression="HasCategory('EntityType')" />
+      <Setter Property="Background" Value="#FFC0C0C0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Property Primary" ValueLabel="True">
+      <Condition Expression="HasCategory('Property Primary')" />
+      <Setter Property="Background" Value="#FF008000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Property Optional" ValueLabel="True">
+      <Condition Expression="HasCategory('Property Optional')" />
+      <Setter Property="Background" Value="#FF808040" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Property Foreign" ValueLabel="True">
+      <Condition Expression="HasCategory('Property Foreign')" />
+      <Setter Property="Background" Value="#FF8080FF" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Property Required" ValueLabel="True">
+      <Condition Expression="HasCategory('Property Required')" />
+      <Setter Property="Background" Value="#FFC0A000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Navigation Property" ValueLabel="True">
+      <Condition Expression="HasCategory('Navigation Property')" />
+      <Setter Property="Background" Value="#FF990000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Navigation Collection" ValueLabel="True">
+      <Condition Expression="HasCategory('Navigation Collection')" />
+      <Setter Property="Background" Value="#FFFF3232" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Model" ValueLabel="True">
+      <Condition Expression="HasCategory('Model')" />
+      <Setter Property="Background" Value="#FFFFFFFF" />
+    </Style>
+  </Styles>
+  <Properties>
+    <Property Id="Name" Group="Model Properties" DataType="System.String" />
+    <Property Id="Field"  Description="Backing field" Group="Model Properties" DataType="System.String" />
+    <Property Id="Type"  Description="CLR data type" Group="Model Properties" DataType="System.String" />
+    <Property Id="To" Description="Source property" Group="Model Properties" DataType="System.String" />
+    <Property Id="From" Description="Target property" Group="Model Properties" DataType="System.String" />
+    <Property Id="Dependent" Description="Dependent entity" Group="Model Properties" DataType="System.String" />
+    <Property Id="Inverse" Description="Inverse entity" Group="Model Properties" DataType="System.String" />
+    <Property Id="Principal" Description="Principal entity" Group="Model Properties" DataType="System.String" />    
+    <Property Id="Annotations" Description="Annotations" Group="Model Properties" DataType="System.String" />
+    <Property Id="BaseClass"  Description="Base class" Group="Model Properties" DataType="System.String" />
+    <Property Id="ChangeTrackingStrategy" Description="Change tracking strategy" Group="Model Properties" DataType="System.String" />
+    <Property Id="IsUnique" Group="Model Properties" DataType="System.Boolean" />
+    <Property Id="IsAbstract" Group="Model Properties" DataType="System.Boolean" />
+    <Property Id="ProductVersion" Label="Product Version" Description="EF Core product version" Group="Model Properties" DataType="System.String" />
+    <Property Id="IsIndexed" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsRequired" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsPrimaryKey" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsForeignKey" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsShadow" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsAlternateKey" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsConcurrencyToken" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsIndexed" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsUnicode" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="ValueGenerated" Group="Property Flags" DataType="System.String" />
+    <Property Id="BeforeSaveBehavior" Group="Property Flags" DataType="System.String" />
+    <Property Id="AfterSaveBehavior" Group="Property Flags" DataType="System.String" />
+    <Property Id="PropertyAccessMode" Group="Property Flags" DataType="System.String" />
+  </Properties>
+</DirectedGraph>
