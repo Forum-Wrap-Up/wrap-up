@@ -27,6 +27,7 @@ public static class ForumImportServiceCollectionExtensions
         services.AddScoped<IForumFreeApiClient, ForumFreeApiClient>();
         services.AddScoped<ForumImportOperationManager>();
         services.AddScoped<ForumImportProcessor>();
+        services.AddScoped<ForumProfileService>();
         services.AddScoped<ForumProfileImporter>();
         services.AddScoped<ForumPostPageImporter>();
         services.AddScoped<ForumRawReferenceSynchronizer>();

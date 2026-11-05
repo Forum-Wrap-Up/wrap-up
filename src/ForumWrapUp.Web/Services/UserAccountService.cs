@@ -1,5 +1,6 @@
 using ForumWrapUp.Data;
 using ForumWrapUp.Data.Entities;
+using ForumWrapUp.Data.Entities.Raw;
 using ForumWrapUp.Web.Validation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ public sealed class UserAccountService
     {
         return _dbContext.UserAccounts
             .AsNoTracking()
+            .Include(account => account.ForumProfile)
             .OrderBy(account => account.Mid)
             .ToListAsync(cancellationToken);
     }
@@ -29,6 +31,7 @@ public sealed class UserAccountService
     {
         return _dbContext.UserAccounts
             .AsNoTracking()
+            .Include(account => account.ForumProfile)
             .SingleOrDefaultAsync(account => account.Mid == mid, cancellationToken);
     }
 
@@ -46,10 +49,20 @@ public sealed class UserAccountService
         if (accountExists)
             return null;
 
+        ForumProfile? forumProfile = await _dbContext.ForumProfiles
+            .SingleOrDefaultAsync(profile => profile.Mid == mid, cancellationToken);
+        
+        if (forumProfile is null)
+        {
+            forumProfile = new ForumProfile { Mid = mid };
+            _dbContext.ForumProfiles.Add(forumProfile);
+        }
+
         DateTime createdAtUtc = DateTime.UtcNow;
         UserAccount account = new()
         {
             Mid = mid,
+            ForumProfile = forumProfile,
             CreatedAtUtc = createdAtUtc,
             ProfileVerifiedAtUtc = createdAtUtc,
             IsActive = true

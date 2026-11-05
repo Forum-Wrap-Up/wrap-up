@@ -8,17 +8,7 @@ public sealed class UserAccount
     /// <summary>Identificativo stabile del profilo forum, usato come chiave dell'account locale.</summary>
     public int Mid { get; set; }
 
-    /// <summary>Ultimo nickname acquisito dal forum; puo cambiare senza modificare il MID.</summary>
-    public string? Nickname { get; set; }
-
-    /// <summary>Indirizzo dell'avatar restituito dal profilo forum, se disponibile.</summary>
-    public string? AvatarUrl { get; set; }
-
-    /// <summary>Data di registrazione al forum in UTC, se acquisita dal profilo.</summary>
-    public DateTime? ForumRegisteredAtUtc { get; set; }
-
-    /// <summary>Totale dei messaggi dichiarato dal profilo forum, non limitato all'anno del wrap-up.</summary>
-    public int? ForumMessageCount { get; set; }
+    public ForumProfile ForumProfile { get; set; } = null!;
 
     /// <summary>Hash della password locale; non contiene la password in chiaro.</summary>
     public string PasswordHash { get; set; } = string.Empty;

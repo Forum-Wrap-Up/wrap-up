@@ -1,17 +1,16 @@
-using ForumFree.Net.Models;
 using ForumWrapUp.Data.Entities;
 
 namespace ForumWrapUp.Importing;
 
 public sealed class ForumImportProcessor
 {
-    private readonly ForumProfileImporter _profileImporter;
+    private readonly ForumProfileService _profileService;
     private readonly ForumPostPageImporter _pageImporter;
     private readonly ForumRawDataSynchronizer _rawDataSynchronizer;
 
-    public ForumImportProcessor(ForumProfileImporter profileImporter, ForumPostPageImporter pageImporter, ForumRawDataSynchronizer rawDataSynchronizer)
+    public ForumImportProcessor(ForumProfileService profileService, ForumPostPageImporter pageImporter, ForumRawDataSynchronizer rawDataSynchronizer)
     {
-        _profileImporter = profileImporter;
+        _profileService = profileService;
         _pageImporter = pageImporter;
         _rawDataSynchronizer = rawDataSynchronizer;
     }
@@ -19,9 +18,9 @@ public sealed class ForumImportProcessor
     public async Task ProcessAsync(ImportOperation operation, CancellationToken cancellationToken)
     {
         ForumImportDateRange dateRange = ForumImportDateRange.Create(operation.FromDate, operation.ToDate);
-        UserProfile profile = await _profileImporter.GetByMidAsync(operation.Mid);
+        await _profileService.RefreshIfUninitializedAsync(operation.Mid, cancellationToken);
         ForumPostImportBatch posts = await _pageImporter.FetchAsync(operation, dateRange, cancellationToken);
 
-        await _rawDataSynchronizer.SynchronizeAsync(operation, profile, posts, dateRange, cancellationToken);
+        await _rawDataSynchronizer.SynchronizeAsync(operation, posts, dateRange, cancellationToken);
     }
 }

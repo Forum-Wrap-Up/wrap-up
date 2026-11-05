@@ -14,6 +14,8 @@ public sealed class UserResponse
 
     public int? ForumMessageCount { get; init; }
 
+    public bool? IsBanned { get; init; }
+
     public required DateTime CreatedAtUtc { get; init; }
 
     public required DateTime ProfileVerifiedAtUtc { get; init; }
@@ -27,10 +29,11 @@ public sealed class UserResponse
         return new UserResponse
         {
             Mid = account.Mid,
-            Nickname = account.Nickname,
-            AvatarUrl = account.AvatarUrl,
-            ForumRegisteredAtUtc = account.ForumRegisteredAtUtc,
-            ForumMessageCount = account.ForumMessageCount,
+            Nickname = account.ForumProfile.Nickname,
+            AvatarUrl = account.ForumProfile.AvatarUrl,
+            ForumRegisteredAtUtc = account.ForumProfile.ForumRegisteredAtUtc,
+            ForumMessageCount = account.ForumProfile.ForumMessageCount,
+            IsBanned = account.ForumProfile.IsBanned,
             CreatedAtUtc = account.CreatedAtUtc,
             ProfileVerifiedAtUtc = account.ProfileVerifiedAtUtc,
             LastLoginAtUtc = account.LastLoginAtUtc,

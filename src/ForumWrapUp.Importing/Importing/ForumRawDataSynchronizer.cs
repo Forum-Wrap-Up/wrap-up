@@ -1,7 +1,6 @@
 using ForumWrapUp.Data;
 using ForumWrapUp.Data.Entities;
 using ForumWrapUp.Data.Entities.Raw;
-using ForumFree.Net.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ForumWrapUp.Importing;
@@ -19,8 +18,7 @@ public sealed class ForumRawDataSynchronizer
         _postSynchronizer = postSynchronizer;
     }
 
-    public async Task SynchronizeAsync(ImportOperation operation, UserProfile profile, ForumPostImportBatch batch, ForumImportDateRange dateRange,
-        CancellationToken cancellationToken)
+    public async Task SynchronizeAsync(ImportOperation operation, ForumPostImportBatch batch, ForumImportDateRange dateRange, CancellationToken cancellationToken)
     {
         await using Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction transaction =
             await _dbContext.Database.BeginTransactionAsync(cancellationToken);
@@ -36,11 +34,6 @@ public sealed class ForumRawDataSynchronizer
 
         if (forum is null)
             _dbContext.ForumInstances.Add(new ForumInstance { ApiForumId = batch.ApiForumId });
-
-        user.Nickname = profile.Nickname;
-        user.AvatarUrl = profile.Avatar;
-        user.ForumRegisteredAtUtc = profile.Registration.UtcDateTime;
-        user.ForumMessageCount = profile.Messages;
 
         ForumRawReferences references = await _referenceSynchronizer.SynchronizeAsync(batch.ApiForumId, batch.PostsById, cancellationToken);
 

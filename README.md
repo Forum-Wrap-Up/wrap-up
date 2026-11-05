@@ -36,9 +36,10 @@ Per EF, `ForumWrapUpDbContextFactory` legge prima `FORUM_WRAPUP_CONNECTION_STRIN
 
 ## Modello iniziale
 
-Le tabelle `forum_instances`, `forum_sections`, `forum_topics` e `forum_posts` appartengono allo schema PostgreSQL `raw`. Le altre tabelle rimangono nello schema predefinito (`public` con la configurazione PostgreSQL standard). Database e `DbContext` restano unici; le relazioni possono attraversare gli schemi.
+Le tabelle `forum_profiles`, `forum_instances`, `forum_sections`, `forum_topics` e `forum_posts` appartengono allo schema PostgreSQL `raw`. Le altre tabelle rimangono nello schema predefinito (`public` con la configurazione PostgreSQL standard). Database e `DbContext` restano unici; le relazioni possono attraversare gli schemi.
 
-- account e tentativi di registrazione con MID;
+- profili ForumFree, che possono essere sincronizzati anche prima della creazione dell'account locale;
+- account e tentativi di registrazione con MID, con credenziali e stato di accesso separati dai dati ForumFree;
 - istanze forum, sezioni, topic e post, conservando gli identificativi remoti e il contenuto HTML;
 - punti originali e punti numerici nullable, perché l'API può restituire una stringa vuota;
 - operazioni d'importazione persistite, con intervallo, stato e progressi;
@@ -48,7 +49,7 @@ Le date dei post sono archiviate in UTC. La conversione al giorno locale `Europe
 
 ## Importazione dei dati raw
 
-L'API amministrativa `POST /api/admin/imports` accoda l'importazione raw per MID e intervallo (`fromDate`/`toDate`, formato `YYYY-MM-DD`) e restituisce `202 Accepted` con l'ID e l'URL per consultare lo stato. `GET /api/admin/imports/{operationId}` restituisce stato e progresso. Le date sono inclusive nel fuso `Europe/Rome`; il worker è eseguito nella stessa applicazione e processa una sola operazione alla volta. Questa fase non genera le aggregazioni annuali.
+L'API amministrativa `POST /api/admin/imports` accoda l'importazione raw per MID e intervallo (`fromDate`/`toDate`, formato `YYYY-MM-DD`) e restituisce `202 Accepted` con l'ID e l'URL per consultare lo stato. `GET /api/admin/imports/{operationId}` restituisce stato e progresso. Le date sono inclusive nel fuso `Europe/Rome`; il worker è eseguito nella stessa applicazione e processa una sola operazione alla volta. Questa fase non genera le aggregazioni annuali. Il profilo ForumFree viene acquisito durante l'importazione dei post solo se il profilo locale non è ancora stato sincronizzato.
 
 Configurare `ForumApi:ForumUri` con l'URI assoluto della root del forum e, facoltativamente, `ForumApi:MaximumPageDelay` con un intervallo massimo (formato `TimeSpan`, ad esempio `00:05:00`). Il cookie è letto dal provider `IForumApiCookieProvider` tramite la chiave di configurazione `ForumApi:Cookie`. In sviluppo, WebApplication carica .NET User Secrets quando l'ambiente è `Development`; impostare il valore senza inserirlo nei file versionati:
 
@@ -68,8 +69,9 @@ Tutti gli endpoint seguenti richiedono l'autenticazione amministrativa:
 - `POST /api/admin/users` crea un account per MID e attesta la verifica del profilo da parte dell'amministratore; il body contiene `mid` e `password`. La password (almeno 12 caratteri) viene hashata lato server.
 - `PUT /api/admin/users/{mid}/password` reimposta la password, sempre hashata lato server.
 - `DELETE /api/admin/users/{mid}` disattiva l'account senza eliminare dati associati; `POST /api/admin/users/{mid}/restore` lo riattiva.
+- `POST /api/admin/forum-profiles/{mid}/refresh` rilegge e salva il profilo ForumFree anche se non esiste ancora un account locale. Restituisce i dati del profilo, incluso `isBanned`; `502` indica che il profilo remoto non è raggiungibile o non è valido.
 
-Gli account disattivati non sono ammessi a nuove importazioni. Il modello EF include lo stato `IsActive`; la migrazione iniziale deve includere questa proprietà.
+Gli account disattivati non sono ammessi a nuove importazioni. `ForumProfile.IsBanned` rappresenta lo stato di ban restituito da ForumFree e non modifica automaticamente `UserAccount.IsActive`, che rappresenta lo stato locale dell'account. Il modello EF include entrambi gli stati; la migrazione iniziale deve includere la tabella `forum_profiles` e la relazione uno-a-uno tra profilo e account locale.
 
 ## Mappatura delle risposte ForumFree.NET
 
@@ -83,6 +85,7 @@ I payload di riferimento sono in `C:\Repos\Other\Personal\ForumFree.NET\payload`
 | `posts[].id`, `date`, `points`, `content` | `ForumPost.ExternalId`, `PublishedAtUtc`, `Points`/`RawPoints`, `ContentHtml` |
 | `posts[].topic.id/title/posts` | `ForumTopic.ExternalId`, `TitleHtml`, `PostCount` |
 | `posts[].forum.id/name` | `ForumSection.ExternalId`, `Name` |
-| `GetProfileByIdAsync` / `GetProfileByNicknameAsync` | oggetto profilo indicizzato da una chiave JSON dinamica; si conservano nel profilo account nickname, avatar, data di registrazione e contatore messaggi utili all'applicazione |
+| `GetProfileByIdAsync` / `GetProfileByNicknameAsync` `banned` flag | `ForumProfile.IsBanned` (`UserProfile.Banned != 0`) |
+| `GetProfileByIdAsync` / `GetProfileByNicknameAsync` | oggetto profilo indicizzato da una chiave JSON dinamica; nickname, avatar, data di registrazione, contatore messaggi e flag `IsBanned` sono salvati in `ForumProfile`, indipendentemente dalla presenza di un account locale |
 
 `points` è serializzato come stringa e nei payload può essere vuoto: il valore originale viene mantenuto in `RawPoints`, mentre `Points` contiene il valore numerico quando è interpretabile, altrimenti `null`. Il modello non persiste attributi del profilo non usati dal prodotto (ad esempio permessi amministrativi o preferenze UI).

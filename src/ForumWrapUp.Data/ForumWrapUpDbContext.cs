@@ -13,6 +13,8 @@ public sealed class ForumWrapUpDbContext : DbContext
 
     public DbSet<UserAccount> UserAccounts => Set<UserAccount>();
 
+    public DbSet<ForumProfile> ForumProfiles => Set<ForumProfile>();
+
     public DbSet<RegistrationAttempt> RegistrationAttempts => Set<RegistrationAttempt>();
 
     public DbSet<ForumInstance> ForumInstances => Set<ForumInstance>();
@@ -33,17 +35,29 @@ public sealed class ForumWrapUpDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ForumProfile>(entity =>
+        {
+            entity.ToTable("forum_profiles", "raw");
+            entity.HasKey(profile => profile.Mid);
+            entity.Property(profile => profile.Mid).ValueGeneratedNever();
+            entity.Property(profile => profile.Nickname).HasMaxLength(100);
+            entity.Property(profile => profile.AvatarUrl).HasMaxLength(2048);
+            entity.Property(profile => profile.ForumRegisteredAtUtc).HasColumnType("timestamp with time zone");
+            entity.Property(profile => profile.LastSyncedAtUtc).HasColumnType("timestamp with time zone");
+            entity.HasOne(profile => profile.UserAccount)
+                .WithOne(account => account.ForumProfile)
+                .HasForeignKey<UserAccount>(account => account.Mid)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
         modelBuilder.Entity<UserAccount>(entity =>
         {
             entity.ToTable("user_accounts");
             entity.HasKey(account => account.Mid);
             entity.Property(account => account.Mid).ValueGeneratedNever();
-            entity.Property(account => account.Nickname).HasMaxLength(100);
-            entity.Property(account => account.AvatarUrl).HasMaxLength(2048);
             entity.Property(account => account.PasswordHash).HasMaxLength(512).IsRequired();
             entity.Property(account => account.IsActive).HasDefaultValue(true);
             entity.Property(account => account.CreatedAtUtc).HasColumnType("timestamp with time zone");
-            entity.Property(account => account.ForumRegisteredAtUtc).HasColumnType("timestamp with time zone");
             entity.Property(account => account.ProfileVerifiedAtUtc).HasColumnType("timestamp with time zone");
             entity.Property(account => account.LastLoginAtUtc).HasColumnType("timestamp with time zone");
         });
