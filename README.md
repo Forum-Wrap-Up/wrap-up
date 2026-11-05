@@ -1,1 +1,62 @@
-# wrap-up
+# Forum Wrap-Up
+
+Applicazione web ASP.NET Core per la generazione del wrap-up annuale dei post ForumCommunity.
+
+## Progetti
+
+- `src/ForumWrapUp.Web`: applicazione MVC e integrazione con ForumFree.NET.
+- `src/ForumWrapUp.Data`: entità EF Core, `DbContext` e configurazione PostgreSQL.
+
+Il modello EF è la fonte del modello relazionale. Durante la validazione si modificano solo le entità e la configurazione: non sono presenti migrazioni o snapshot. La prima migrazione sarà generata dopo l'approvazione del modello.
+
+## Database
+
+Il provider scelto è PostgreSQL con EF Core 10. Per avviare l'app con il database configurare la variabile d'ambiente `ConnectionStrings__ForumWrapUp` con la connection string PostgreSQL. Non inserire credenziali reali nei file versionati.
+
+Ripristinare il tool EF locale al primo utilizzo:
+
+```powershell
+dotnet tool restore
+```
+
+Solo dopo la validazione del modello, creare la migrazione iniziale dalla root del repository:
+
+```powershell
+dotnet ef migrations add InitialCreate --project src\ForumWrapUp.Data --startup-project src\ForumWrapUp.Data --output-dir Migrations
+```
+
+Applicare le migrazioni al database configurato:
+
+```powershell
+dotnet ef database update --project src\ForumWrapUp.Data --startup-project src\ForumWrapUp.Data
+```
+
+Per EF, `ForumWrapUpDbContextFactory` legge prima `FORUM_WRAPUP_CONNECTION_STRING` e poi `ConnectionStrings__ForumWrapUp`; in assenza di entrambe usa una stringa locale senza password. La generazione della migrazione non richiede che PostgreSQL sia avviato. L'app web legge invece `ConnectionStrings__ForumWrapUp` e registra il contesto solo quando la variabile è configurata.
+
+## Modello iniziale
+
+Le tabelle `forum_instances`, `forum_sections`, `forum_topics` e `forum_posts` appartengono allo schema PostgreSQL `raw`. Le altre tabelle rimangono nello schema predefinito (`public` con la configurazione PostgreSQL standard). Database e `DbContext` restano unici; le relazioni possono attraversare gli schemi.
+
+- account e tentativi di registrazione con MID;
+- istanze forum, sezioni, topic e post, conservando gli identificativi remoti e il contenuto HTML;
+- punti originali e punti numerici nullable, perché l'API può restituire una stringa vuota;
+- operazioni d'importazione persistite, con intervallo, stato e progressi;
+- anni abilitati, riepiloghi annuali e statistiche giornaliere.
+
+Le date dei post sono archiviate in UTC. La conversione al giorno locale `Europe/Rome` per le statistiche appartiene alla logica applicativa.
+
+## Mappatura delle risposte ForumFree.NET
+
+I payload di riferimento sono in `C:\Repos\Other\Personal\ForumFree.NET\payload`; i DTO consumati dal package sono nel repository ForumFree.NET, non duplicati nel progetto Data.
+
+| API / campo JSON | Destinazione nel modello |
+|---|---|
+| `GetPostsByUserIdAsync.idForum` | `ForumInstance.ApiForumId` |
+| `pages`, `total`, `currentPage` | progressi dell'`ImportOperation` (pagine/record attesi e acquisiti) |
+| `member.id`, `member.name`, `member.joined` | MID e dati profilo dell'account; il MID è la chiave dell'account |
+| `posts[].id`, `date`, `points`, `content` | `ForumPost.ExternalId`, `PublishedAtUtc`, `Points`/`RawPoints`, `ContentHtml` |
+| `posts[].topic.id/title/posts` | `ForumTopic.ExternalId`, `TitleHtml`, `PostCount` |
+| `posts[].forum.id/name` | `ForumSection.ExternalId`, `Name` |
+| `GetProfileByIdAsync` / `GetProfileByNicknameAsync` | oggetto profilo indicizzato da una chiave JSON dinamica; si conservano nel profilo account nickname, avatar, data di registrazione e contatore messaggi utili all'applicazione |
+
+`points` è serializzato come stringa e nei payload può essere vuoto: il valore originale viene mantenuto in `RawPoints`, mentre `Points` contiene il valore numerico quando è interpretabile, altrimenti `null`. Il modello non persiste attributi del profilo non usati dal prodotto (ad esempio permessi amministrativi o preferenze UI).
