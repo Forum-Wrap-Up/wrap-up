@@ -14,15 +14,10 @@ public static class ForumImportServiceCollectionExtensions
         services.Configure<ForumImportWorkerOptions>(configuration.GetSection(ForumImportWorkerOptions.SectionName));
 
         services.AddTransient<ForumFreeCookieHandler>();
-        services.AddHttpClient<ForumFreeClient>((serviceProvider, client) =>
-        {
-            ForumImportApiOptions options = serviceProvider.GetRequiredService<IOptions<ForumImportApiOptions>>().Value;
+        services.AddHttpClient<ForumFreeClient>(ConfigureForumApiClient)
+            .AddHttpMessageHandler<ForumFreeCookieHandler>();
 
-            if (options.ForumUri is null || !options.ForumUri.IsAbsoluteUri || options.ForumUri.Scheme != Uri.UriSchemeHttps)
-                throw new InvalidOperationException("ForumApi:ForumUri must be configured as an absolute HTTPS URI.");
-
-            client.BaseAddress = options.ForumUri;
-        })
+        services.AddHttpClient<IForumGuidVerificationService, ForumGuidVerificationService>(ConfigureForumApiClient)
             .AddHttpMessageHandler<ForumFreeCookieHandler>();
 
         services.AddScoped<IForumFreeApiClient, ForumFreeApiClient>();
@@ -37,5 +32,15 @@ public static class ForumImportServiceCollectionExtensions
         services.AddScoped<IForumDataImportService, ForumDataImportService>();
 
         return services;
+    }
+
+    private static void ConfigureForumApiClient(IServiceProvider serviceProvider, HttpClient client)
+    {
+        ForumImportApiOptions options = serviceProvider.GetRequiredService<IOptions<ForumImportApiOptions>>().Value;
+
+        if (options.ForumUri is null || !options.ForumUri.IsAbsoluteUri || options.ForumUri.Scheme != Uri.UriSchemeHttps)
+            throw new InvalidOperationException("ForumApi:ForumUri must be configured as an absolute HTTPS URI.");
+
+        client.BaseAddress = options.ForumUri;
     }
 }
