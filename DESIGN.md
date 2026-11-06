@@ -113,7 +113,7 @@ The visual language is square and print-like: sheet edges and list divisions are
 - **Primary:** Muted-teal background, white bold body text, 52px minimum height, and `0.75rem 1.15rem` padding.
 - **Hover / Focus:** Hover shifts to the lighter teal; keyboard focus uses a 3px muted-teal-gray outline with a 5px offset.
 - **Text action:** The in-page “How it works” link remains an underlined text link rather than a second filled button.
-- **Route status:** The account anchors point to `/Account/Register` and `/Account/Login`; those routes are intentionally future work, not implemented flows.
+- **Route status:** `/Account/Login` uses cookie authentication; `/WrapUp` is protected and currently a not-ready placeholder; `/Account/Register` remains future, unimplemented work.
 
 ### Navigation
 - **Masthead:** Deep-charcoal band with a thin lower rule; the NILL / WRAP-UP wordmark uses Barlow Condensed, bold weight, and slight tracking.

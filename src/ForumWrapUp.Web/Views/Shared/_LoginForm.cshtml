@@ -1,0 +1,26 @@
+@model LoginViewModel
+
+<p class="login-description" id="login-description">Usa il tuo MID e la password che hai creato per questo sito, non quella del forum.</p>
+
+<form class="login-form" asp-controller="Account" asp-action="Login" method="post" data-login-form data-login-timeout-ms="@Model.ClientTimeoutMs">
+    <input asp-for="ReturnUrl" type="hidden" />
+    <div class="login-errors" asp-validation-summary="All" role="alert" tabindex="-1" data-login-errors></div>
+
+    <div class="form-field">
+        <label asp-for="Mid">MID</label>
+        <input asp-for="Mid" type="text" inputmode="numeric" autocomplete="username" required aria-describedby="mid-hint mid-error" />
+        <span asp-validation-for="Mid" class="field-error" id="mid-error"></span>
+    </div>
+
+    <div class="form-field">
+        <div class="form-field__heading">
+            <label asp-for="Password">Password</label>
+            <button class="password-toggle" type="button" aria-controls="Password" aria-pressed="false"
+                    aria-label="Mostra la password" data-password-toggle hidden>Mostra</button>
+        </div>
+        <input asp-for="Password" autocomplete="current-password" required aria-describedby="password-error" />
+        <span asp-validation-for="Password" class="field-error" id="password-error"></span>
+    </div>
+
+    <button class="action-link login-submit" type="submit">Accedi</button>
+</form>

@@ -12,4 +12,7 @@
     <Project Path="src/ForumWrapUp.Importing/ForumWrapUp.Importing.csproj" />
     <Project Path="src/ForumWrapUp.Web/ForumWrapUp.Web.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ForumWrapUp.Web.Tests/ForumWrapUp.Web.Tests.csproj" />
+  </Folder>
 </Solution>

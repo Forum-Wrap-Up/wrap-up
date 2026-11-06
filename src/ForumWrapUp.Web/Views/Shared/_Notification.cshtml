@@ -1,0 +1,8 @@
+@model NotificationViewModel
+
+<div class="notification" role="status" aria-atomic="true" data-notification
+     data-dismiss-after="@Model.DismissAfterMilliseconds">
+    <p class="notification__message">@Model.Message</p>
+    <button class="notification-close" type="button" aria-label="Chiudi la notifica" title="Chiudi la notifica"
+            data-notification-close hidden></button>
+</div>

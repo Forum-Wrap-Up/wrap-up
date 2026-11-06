@@ -16,12 +16,27 @@
                 <span>WRAP-UP</span>
             </a>
             <nav class="site-nav" aria-label="Navigazione principale">
-                <a href="/Account/Login">Accedi</a>
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <span class="account-greeting">Ciao, <strong>@User.Identity.Name</strong></span>
+                    <a asp-controller="WrapUp" asp-action="Index">Il mio wrap-up</a>
+                    <form class="logout-form" asp-controller="Account" asp-action="Logout" method="post">
+                        <button class="nav-button" type="submit">Esci</button>
+                    </form>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Login" data-login-trigger>Accedi</a>
+                }
             </nav>
         </div>
     </header>
 
-    <main class="site-main" id="contenuto">
+    <main class="site-main" id="contenuto" tabindex="-1">
+        @if (TempData["StatusMessage"] is string statusMessage)
+        {
+            <partial name="_Notification" model="new NotificationViewModel(statusMessage)" />
+        }
         @RenderBody()
     </main>
 
@@ -32,6 +47,19 @@
         </div>
     </footer>
 
+    @if (User.Identity?.IsAuthenticated != true && ViewData["IsLoginPage"] is not true)
+    {
+        <dialog class="login-dialog" id="login-dialog" aria-labelledby="login-title" aria-describedby="login-description">
+            <div class="login-dialog__heading">
+                <h2 class="account-title" id="login-title">Accedi</h2>
+                <button class="dialog-close" type="button" aria-label="Chiudi la finestra di accesso" title="Chiudi" data-login-close></button>
+            </div>
+            @await Component.InvokeAsync("LoginForm")
+        </dialog>
+    }
+
+    <script src="~/js/site.js" asp-append-version="true" defer></script>
+    <script src="~/js/notifications.js" asp-append-version="true" type="module"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

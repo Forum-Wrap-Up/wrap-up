@@ -1,0 +1,11 @@
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Accedi";
+    ViewData["IsLoginPage"] = true;
+}
+
+<section class="account-page" aria-labelledby="login-title">
+    <h1 class="account-title" id="login-title">Accedi al tuo wrap-up</h1>
+    <partial name="_LoginForm" model="Model" />
+    <a class="account-back" asp-controller="Home" asp-action="Index">Torna alla homepage</a>
+</section>

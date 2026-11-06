@@ -73,6 +73,35 @@ Tutti gli endpoint seguenti richiedono l'autenticazione amministrativa:
 
 Gli account disattivati non sono ammessi a nuove importazioni. `ForumProfile.IsBanned` rappresenta lo stato di ban restituito da ForumFree e non modifica automaticamente `UserAccount.IsActive`, che rappresenta lo stato locale dell'account. Il modello EF include entrambi gli stati; la migrazione iniziale deve includere la tabella `forum_profiles` e la relazione uno-a-uno tra profilo e account locale.
 
+## Accesso degli utenti
+
+Il link **Accedi** apre un dialog nativo con MID e password locale del wrap-up. Senza JavaScript, o accedendo direttamente a una pagina protetta, viene usata `/Account/Login`. L'accesso usa gli account esistenti, creati tramite API amministrativa; l'auto-registrazione non è ancora implementata.
+
+La sessione usa un cookie HttpOnly, SameSite=Lax e Secure in produzione, con scadenza assoluta di 15 giorni e senza rinnovo automatico. Gli account disattivati vengono rifiutati anche quando presentano una sessione esistente. Le credenziali errate, i MID sconosciuti e gli account disattivati producono lo stesso errore. Login e logout richiedono un token antiforgery; il logout è solo POST. Il limite è di 10 richieste di login al minuto per indirizzo IP, in memoria nella singola istanza. Dietro un reverse proxy, configurare gli indirizzi inoltrati soltanto per proxy fidati prima di usare l'IP client per il limite.
+
+Dopo l'accesso, la testata mostra nickname (oppure MID), **Il mio wrap-up** ed **Esci**. `/WrapUp` è protetta da autenticazione utente e per ora mostra uno stato di riepilogo non disponibile: consultazione delle statistiche e download saranno implementati separatamente. Il cookie utente non autorizza le API amministrative.
+
+### Test del login
+
+```powershell
+dotnet test tests\ForumWrapUp.Web.Tests\ForumWrapUp.Web.Tests.csproj
+```
+
+I test HTTP usano un database EF in memoria e account sintetici, senza accedere a PostgreSQL o avviare il worker di importazione.
+
+## Notifiche temporanee
+
+Le conferme non critiche, come l'uscita dall'account, usano il partial `_Notification` e `NotificationViewModel`. Con JavaScript appaiono in basso a destra, senza spostare il contenuto, e si chiudono dopo 6 secondi. Il timer si ferma su hover, focus e quando la scheda non è visibile; riprende dal tempo rimanente. La X usa l'icona SVG esterna e permette la chiusura manuale.
+
+La durata è impostabile per ogni notifica, in millisecondi; `0` disattiva la chiusura automatica:
+
+```cshtml
+<partial name="_Notification" model='new NotificationViewModel("Operazione completata.", 8000)' />
+<partial name="_Notification" model='new NotificationViewModel("Informazione da conservare a video.", 0)' />
+```
+
+Il modulo `notifications.js` inizializza tutti i partial e li dispone in una pila. Per contenuti aggiunti dinamicamente espone `initializeNotifications(root)`. Senza JavaScript, il messaggio resta leggibile nel flusso della pagina e la X viene nascosta. Gli errori dei form non usano questa notifica temporanea.
+
 ## Mappatura delle risposte ForumFree.NET
 
 I payload di riferimento sono in `C:\Repos\Other\Personal\ForumFree.NET\payload`; i DTO consumati dal package sono nel repository ForumFree.NET, non duplicati nel progetto Data.

@@ -3,6 +3,7 @@ using ForumWrapUp.Data.Entities;
 using ForumWrapUp.Importing;
 using ForumWrapUp.Importing.ForumFree;
 using ForumWrapUp.Web.ForumFree;
+using ForumWrapUp.Web.Models;
 using ForumWrapUp.Web.Security;
 using ForumWrapUp.Web.Services;
 using Microsoft.AspNetCore.Identity;
@@ -16,9 +17,13 @@ public sealed class Program
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddControllersWithViews();
+        IConfigurationSection loginFormSection = builder.Configuration.GetSection("LoginForm");
+        builder.Services.Configure<LoginFormOptions>(loginFormSection);
         builder.Services.AddForumWrapUpImporting(builder.Configuration);
         builder.Services.AddSingleton<IForumApiCookieProvider, ConfigurationForumApiCookieProvider>();
         builder.Services.AddAdminApiAuthentication(builder.Configuration);
+        bool isDevelopment = builder.Environment.IsDevelopment();
+        builder.Services.AddUserAuthentication(isDevelopment);
         builder.Services.AddSingleton<IPasswordHasher<UserAccount>, PasswordHasher<UserAccount>>();
         builder.Services.AddScoped<UserAccountService>();
 
