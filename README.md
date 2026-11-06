@@ -32,7 +32,7 @@ Applicare le migrazioni al database configurato:
 dotnet ef database update --project src\ForumWrapUp.Data --startup-project src\ForumWrapUp.Data
 ```
 
-Per EF, `ForumWrapUpDbContextFactory` legge prima `FORUM_WRAPUP_CONNECTION_STRING` e poi `ConnectionStrings__ForumWrapUp`; in assenza di entrambe usa una stringa locale senza password. La generazione della migrazione non richiede che PostgreSQL sia avviato. L'app web legge invece `ConnectionStrings__ForumWrapUp` e registra il contesto solo quando la variabile è configurata.
+Per EF, `ForumWrapUpDbContextFactory` legge prima `FORUM_WRAPUP_CONNECTION_STRING`, poi `ConnectionStrings__ForumWrapUp` e infine la chiave `ConnectionStrings:ForumWrapUp` negli User Secrets. I progetti Data e Web condividono lo stesso `UserSecretsId`, quindi la connection string salvata per Web è disponibile anche alle migrazioni con Data come startup project. In assenza di configurazione, la factory usa una stringa locale senza password. La generazione della migrazione non richiede che PostgreSQL sia avviato. L'app web carica gli User Secrets in ambiente `Development` e registra il contesto solo quando la connection string è configurata.
 
 ## Modello iniziale
 

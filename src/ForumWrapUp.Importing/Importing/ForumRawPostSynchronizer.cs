@@ -51,13 +51,7 @@ public sealed class ForumRawPostSynchronizer
 
             forumPost.PublishedAtUtc = apiPost.Date.UtcDateTime;
             forumPost.RawPoints = apiPost.Points;
-            forumPost.Points = int.TryParse(
-                apiPost.Points,
-                NumberStyles.Integer,
-                CultureInfo.InvariantCulture,
-                out int points)
-                ? points
-                : null;
+            forumPost.Points = int.TryParse(apiPost.Points, NumberStyles.Integer, CultureInfo.InvariantCulture, out int points) ? points : 0;
             forumPost.ContentHtml = apiPost.Content;
             forumPost.Topic = topic;
             forumPost.Section = section;
