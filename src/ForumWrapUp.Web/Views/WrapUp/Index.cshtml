@@ -1,9 +1,38 @@
+@model IReadOnlyList<WrapUpYearAvailability>
+
 @{
     ViewData["Title"] = "Il mio wrap-up";
 }
 
-<section class="account-page wrap-up-empty" aria-labelledby="wrap-up-title">
+<section class="account-page wrap-up-years" aria-labelledby="wrap-up-title">
     <h1 class="account-title" id="wrap-up-title">Il tuo wrap-up</h1>
-    <p>Il tuo riepilogo non è ancora disponibile. Quando sarà pronto, potrai consultarlo e scaricarlo qui.</p>
+    <p class="wrap-up-years__intro">Qui trovi gli anni abilitati per il tuo wrap-up e lo stato dei tuoi dati.</p>
+
+    @if (Model.Count == 0)
+    {
+        <p class="wrap-up-years__empty" role="status">Non ci sono ancora anni disponibili.</p>
+    }
+    else
+    {
+        <ul class="wrap-up-years__list" aria-label="Anni del wrap-up">
+            @foreach (WrapUpYearAvailability year in Model)
+            {
+                <li class="wrap-up-years__item" data-year="@year.Year" data-available="@year.IsAvailable.ToString().ToLowerInvariant()">
+                    <h2>@year.Year</h2>
+                    <p class="wrap-up-years__status">
+                        @if (year.IsAvailable)
+                        {
+                            <span>Il tuo riepilogo è pronto.</span>
+                        }
+                        else
+                        {
+                            <span>I dati del tuo riepilogo non sono ancora pronti.</span>
+                        }
+                    </p>
+                </li>
+            }
+        </ul>
+    }
+
     <a asp-controller="Home" asp-action="Index">Torna alla homepage</a>
 </section>

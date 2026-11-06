@@ -26,6 +26,7 @@ public sealed class Program
         builder.Services.AddUserAuthentication(isDevelopment);
         builder.Services.AddSingleton<IPasswordHasher<UserAccount>, PasswordHasher<UserAccount>>();
         builder.Services.AddScoped<UserAccountService>();
+        builder.Services.AddScoped<WrapUpYearService>();
 
         string? connectionString = builder.Configuration.GetConnectionString("ForumWrapUp");
         if (!string.IsNullOrWhiteSpace(connectionString))

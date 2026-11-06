@@ -61,6 +61,13 @@ In produzione configurare la stessa chiave tramite il secret storage scelto per 
 
 Le API amministrative richiedono un token nell'header HTTP `Authorization`, usando lo schema Bearer esclusivamente su HTTPS. Configurare il token fuori dal repository, ad esempio tramite la variabile d'ambiente `AdminApi__Token`; il token è distinto dal login degli utenti e non va inserito in query string o log.
 
+### Gestione degli anni del wrap-up
+
+- `GET /api/admin/wrap-up-years` restituisce tutti gli anni configurati, inclusi quelli disabilitati, ad esempio `[{"year":2026,"isEnabled":true}]`.
+- `PUT /api/admin/wrap-up-years/{year}` crea o aggiorna la configurazione; il body JSON richiede `isEnabled`, ad esempio `{"isEnabled":true}`. Risponde con `200 OK` e l'anno aggiornato, ad esempio `{"year":2026,"isEnabled":true}`.
+
+Entrambi gli endpoint richiedono il token amministrativo Bearer e rispondono `401 Unauthorized` senza un token valido. Un anno fuori dall'intervallo 1–9999 o l'assenza del campo `isEnabled` produce `400 Bad Request`. La tabella globale `wrap_up_years` contiene una riga per anno; i riepiloghi di tutti gli anni condividono `annual_wrap_ups` e sono identificati da MID e anno. Disabilitare un anno lo nasconde agli utenti, senza cancellare riepiloghi o statistiche.
+
 ## Gestione amministrativa degli utenti
 
 Tutti gli endpoint seguenti richiedono l'autenticazione amministrativa:
@@ -79,7 +86,7 @@ Il link **Accedi** apre un dialog nativo con MID e password locale del wrap-up. 
 
 La sessione usa un cookie HttpOnly, SameSite=Lax e Secure in produzione, con scadenza assoluta di 15 giorni e senza rinnovo automatico. Gli account disattivati vengono rifiutati anche quando presentano una sessione esistente. Le credenziali errate, i MID sconosciuti e gli account disattivati producono lo stesso errore. Login e logout richiedono un token antiforgery; il logout è solo POST. Il limite è di 10 richieste di login al minuto per indirizzo IP, in memoria nella singola istanza. Dietro un reverse proxy, configurare gli indirizzi inoltrati soltanto per proxy fidati prima di usare l'IP client per il limite.
 
-Dopo l'accesso, la testata mostra nickname (oppure MID), **Il mio wrap-up** ed **Esci**. `/WrapUp` è protetta da autenticazione utente e per ora mostra uno stato di riepilogo non disponibile: consultazione delle statistiche e download saranno implementati separatamente. Il cookie utente non autorizza le API amministrative.
+Dopo l'accesso, la testata mostra nickname (oppure MID), **Il mio wrap-up** ed **Esci**. `/WrapUp` è protetta da autenticazione utente, elenca solo gli anni abilitati dall'amministratore e indica per ciascuno se il riepilogo dell'utente autenticato è pronto. Un riepilogo è disponibile solo quando esiste una riga `annual_wrap_ups` per il MID e l'anno con `IsReady` impostato a `true`. Il cookie utente non autorizza le API amministrative.
 
 ### Test del login
 
