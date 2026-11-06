@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-06T11:05:13+01:00",
+  "title": "Design System: Nill Wrap-Up",
+  "extensions": {
+    "colorMeta": {
+      "page-charcoal": {
+        "role": "neutral",
+        "displayName": "Page Charcoal",
+        "canonical": "#1B1B1B",
+        "tonalRamp": [
+          "oklch(15% 0.000 0)",
+          "oklch(25% 0.000 0)",
+          "oklch(35% 0.000 0)",
+          "oklch(45% 0.000 0)",
+          "oklch(55% 0.000 0)",
+          "oklch(65% 0.000 0)",
+          "oklch(80% 0.000 0)",
+          "oklch(95% 0.000 0)"
+        ]
+      },
+      "sheet-charcoal": {
+        "role": "neutral",
+        "displayName": "Sheet Charcoal",
+        "canonical": "#2A2A2A",
+        "tonalRamp": [
+          "oklch(15% 0.000 0)",
+          "oklch(25% 0.000 0)",
+          "oklch(35% 0.000 0)",
+          "oklch(45% 0.000 0)",
+          "oklch(55% 0.000 0)",
+          "oklch(65% 0.000 0)",
+          "oklch(80% 0.000 0)",
+          "oklch(95% 0.000 0)"
+        ]
+      },
+      "deep-charcoal": {
+        "role": "neutral",
+        "displayName": "Deep Charcoal",
+        "canonical": "#151515",
+        "tonalRamp": [
+          "oklch(15% 0.000 0)",
+          "oklch(25% 0.000 0)",
+          "oklch(35% 0.000 0)",
+          "oklch(45% 0.000 0)",
+          "oklch(55% 0.000 0)",
+          "oklch(65% 0.000 0)",
+          "oklch(80% 0.000 0)",
+          "oklch(95% 0.000 0)"
+        ]
+      },
+      "ink-light": {
+        "role": "neutral",
+        "displayName": "Light Ink",
+        "canonical": "#DCE0DF",
+        "tonalRamp": [
+          "oklch(15% 0.001 179.7)",
+          "oklch(25% 0.002 179.7)",
+          "oklch(35% 0.003 179.7)",
+          "oklch(45% 0.004 179.7)",
+          "oklch(55% 0.004 179.7)",
+          "oklch(65% 0.003 179.7)",
+          "oklch(80% 0.002 179.7)",
+          "oklch(95% 0.000 179.7)"
+        ]
+      },
+      "muted-teal-gray": {
+        "role": "secondary",
+        "displayName": "Muted Teal-Gray",
+        "canonical": "#B2CBC5",
+        "tonalRamp": [
+          "oklch(15% 0.008 179.5)",
+          "oklch(25% 0.014 179.5)",
+          "oklch(35% 0.020 179.5)",
+          "oklch(45% 0.025 179.5)",
+          "oklch(55% 0.025 179.5)",
+          "oklch(65% 0.020 179.5)",
+          "oklch(80% 0.011 179.5)",
+          "oklch(95% 0.003 179.5)"
+        ]
+      },
+      "nill-teal": {
+        "role": "primary",
+        "displayName": "Nill Teal",
+        "canonical": "#4C6D6D",
+        "tonalRamp": [
+          "oklch(15% 0.011 196.0)",
+          "oklch(25% 0.019 196.0)",
+          "oklch(35% 0.027 196.0)",
+          "oklch(45% 0.034 196.0)",
+          "oklch(55% 0.034 196.0)",
+          "oklch(65% 0.027 196.0)",
+          "oklch(80% 0.015 196.0)",
+          "oklch(95% 0.004 196.0)"
+        ]
+      },
+      "rule-teal": {
+        "role": "neutral",
+        "displayName": "Translucent Teal Rule",
+        "canonical": "rgba(178, 203, 197, 0.34)",
+        "tonalRamp": [
+          "oklch(15% 0.008 179.5 / 34%)",
+          "oklch(25% 0.014 179.5 / 34%)",
+          "oklch(35% 0.020 179.5 / 34%)",
+          "oklch(45% 0.025 179.5 / 34%)",
+          "oklch(55% 0.025 179.5 / 34%)",
+          "oklch(65% 0.020 179.5 / 34%)",
+          "oklch(80% 0.011 179.5 / 34%)",
+          "oklch(95% 0.003 179.5 / 34%)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "canonical": "#fff",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(25% 0 0)",
+          "oklch(35% 0 0)",
+          "oklch(45% 0 0)",
+          "oklch(55% 0 0)",
+          "oklch(65% 0 0)",
+          "oklch(80% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "teal-hover": {
+        "role": "secondary",
+        "displayName": "Teal Hover",
+        "canonical": "#5c7f7f",
+        "tonalRamp": [
+          "oklch(15% 0.012 196.1)",
+          "oklch(25% 0.020 196.1)",
+          "oklch(35% 0.028 196.1)",
+          "oklch(45% 0.036 196.1)",
+          "oklch(55% 0.036 196.1)",
+          "oklch(65% 0.028 196.1)",
+          "oklch(80% 0.016 196.1)",
+          "oklch(95% 0.004 196.1)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Barlow Condensed Display",
+        "purpose": "Large editorial headlines and compact statistic or step labels."
+      },
+      "body": {
+        "displayName": "Verdana-style Body",
+        "purpose": "Navigation, explanatory copy, and readable supporting text."
+      }
+    },
+    "motion": [
+      {
+        "name": "action-hover",
+        "value": "background-color 140ms ease-out",
+        "purpose": "Subtle background-color response on the primary action link."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "transition-duration: 0.01ms",
+        "purpose": "Reduce transitions when the user requests reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "tablet-stack",
+        "value": "800px"
+      },
+      {
+        "name": "mobile",
+        "value": "560px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action Link",
+      "kind": "custom",
+      "refersTo": "action-link",
+      "description": "Square, filled anchor for the primary registration action.",
+      "html": "<a class=\"ds-action-link\" href=\"/Account/Register\">Inizia la registrazione</a>",
+      "css": ".ds-action-link { display: inline-flex; min-height: 52px; align-items: center; justify-content: center; padding: 0.75rem 1.15rem; background: var(--teal); color: #fff; font-family: var(--body); font-weight: 700; text-decoration: none; transition: background-color 140ms ease-out; } .ds-action-link:hover { background: #5c7f7f; color: #fff; } .ds-action-link:focus-visible { border-radius: 2px; outline: 3px solid var(--soft-text); outline-offset: 5px; }"
+    },
+    {
+      "name": "Masthead",
+      "kind": "nav",
+      "refersTo": "navigation-link",
+      "description": "Compact wordmark and sign-in navigation on a deep-charcoal band.",
+      "html": "<header class=\"ds-header\"><div class=\"ds-header-inner\"><a class=\"ds-brand\" href=\"/\">NILL <span aria-hidden=\"true\">/</span> WRAP-UP</a><nav aria-label=\"Navigazione principale\"><a class=\"ds-nav-link\" href=\"/Account/Login\">Accedi</a></nav></div></header>",
+      "css": ".ds-header { border-bottom: 1px solid var(--rule); background: var(--deep); } .ds-header-inner { width: min(1200px, calc(100% - 64px)); min-height: 76px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; } .ds-brand { display: inline-flex; align-items: baseline; gap: 0.55rem; color: var(--text); font-family: var(--display); font-size: 1.6rem; font-weight: 700; letter-spacing: 0.04em; line-height: 1; text-decoration: none; } .ds-brand span { color: var(--soft-text); } .ds-nav-link { color: var(--soft-text); font-family: var(--body); text-decoration: underline; text-underline-offset: 0.24em; } .ds-nav-link:hover { color: #fff; } .ds-nav-link:focus-visible { border-radius: 2px; outline: 3px solid var(--soft-text); outline-offset: 4px; } @media (max-width: 560px) { .ds-header-inner { width: calc(100% - 40px); min-height: 68px; } }"
+    },
+    {
+      "name": "Statistics Index",
+      "kind": "custom",
+      "description": "Definition-list index of statistic labels and short descriptions, divided by fine rules.",
+      "html": "<dl class=\"ds-stat-list\"><div class=\"ds-stat-item\"><dt>Messaggi pubblicati</dt><dd>Quanti messaggi hai scritto nel periodo scelto.</dd></div></dl>",
+      "css": ".ds-stat-list { margin: 0; border-top: 1px solid var(--rule); } .ds-stat-item { padding: 0.85rem 0; border-bottom: 1px solid var(--rule); } .ds-stat-item dt { color: var(--text); font-family: var(--display); font-size: 1.3rem; font-weight: 700; line-height: 1.15; } .ds-stat-item dd { margin: 0.25rem 0 0; color: var(--soft-text); font-family: var(--body); font-size: 0.875rem; line-height: 1.5; }"
+    },
+    {
+      "name": "Verification Step",
+      "kind": "custom",
+      "description": "Ordered verification row with a typographic zero-padded number and supporting explanation.",
+      "html": "<ol class=\"ds-verification-steps\"><li class=\"ds-verification-step\"><h3>Indica il tuo MID</h3><p>Il MID identifica il tuo profilo anche se in seguito cambi nickname.</p></li></ol>",
+      "css": ".ds-verification-steps { margin: 0; padding: 0; list-style: none; counter-reset: verification-step; } .ds-verification-step { display: grid; grid-template-columns: 2rem minmax(150px, 0.65fr) minmax(0, 1.35fr); gap: 1.5rem; padding: 1.15rem 0; border-top: 1px solid var(--rule); counter-increment: verification-step; } .ds-verification-step::before { content: \"0\" counter(verification-step); grid-column: 1; grid-row: 1; color: var(--soft-text); font-family: var(--display); font-size: 1.3rem; font-weight: 700; } .ds-verification-step h3 { grid-column: 2; grid-row: 1; margin: 0; color: var(--text); font-family: var(--display); font-size: 1.5rem; line-height: 1.1; } .ds-verification-step p { grid-column: 3; grid-row: 1; max-width: 58ch; margin: 0; color: var(--soft-text); font-family: var(--body); } @media (max-width: 560px) { .ds-verification-step { grid-template-columns: 2rem minmax(0, 1fr); gap: 0.4rem 1rem; } .ds-verification-step::before { grid-column: 1; grid-row: 1; } .ds-verification-step h3 { grid-column: 2; grid-row: 1; } .ds-verification-step p { grid-column: 2; grid-row: 2; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Nill Scene Zine",
+    "overview": "The public wrap-up reads as one dark editorial sheet: charcoal stock, restrained photocopy grain, light ink, and muted teal details. Display headlines use self-hosted Barlow Condensed; Verdana-style sans text keeps explanations and navigation familiar and readable. The homepage's five-stat index is deliberately uneven and editorial rather than a row of cards.\n\nThe build is tonal and flat, using thin rules and changes in charcoal value instead of elevation. Actions are square, high-contrast links. The Barlow Condensed font file is bundled with its SIL Open Font License.",
+    "keyCharacteristics": [
+      "Continuous charcoal sheet with subtle repeating photocopy grain.",
+      "Condensed uppercase display paired with readable Verdana-style body text.",
+      "Muted teal marks links, rules, and the primary action; the CTA remains square.",
+      "Editorial lists and verification rows use rules and alignment, not card containers."
+    ],
+    "rules": [
+      {
+        "name": "The Charcoal Stock Rule",
+        "body": "Keep the page in the verified charcoal range; use muted teal and light ink as accents rather than introducing unrelated hues.",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "Do use the bundled Barlow Condensed face for display and the Verdana-style stack for reading text.",
+      "Do keep primary actions square, high-contrast links with a visible keyboard-focus outline.",
+      "Do use charcoal layering, grain, and fine rules to create print depth without elevation.",
+      "Do keep personal recap content private and derived from the member's own Nill data."
+    ],
+    "donts": [
+      "Don't invent activity values, rankings, comparisons, or another member's data.",
+      "Don't turn the editorial index into a row of equal cards or add unsupported visual colors."
+    ]
+  }
+}

@@ -1,8 +1,74 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@{
+    ViewData["Title"] = "Il tuo anno sul Nill Forum";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="home-page">
+    <section class="home-intro" aria-labelledby="home-title">
+        <div class="home-intro__story">
+            <h1 id="home-title">Il tuo anno sul Nill Forum</h1>
+            <p class="home-intro__description">Rileggi il tuo anno sul Nill Forum attraverso cinque statistiche personali.</p>
+            <div class="home-actions">
+                <a class="action-link" href="/Account/Register">Registrati</a>
+                <a class="text-link" href="#come-funziona">Come funziona il wrap-up</a>
+            </div>
+        </div>
+
+        <aside class="statistics-index" aria-labelledby="statistics-title">
+            <h2 id="statistics-title">Cinque indicatori, una storia</h2>
+            <dl class="statistics-index__list">
+                <div class="statistics-index__item">
+                    <dt>Messaggi pubblicati</dt>
+                    <dd>Il numero di messaggi pubblicati nell'anno selezionato.</dd>
+                </div>
+                <div class="statistics-index__item">
+                    <dt>Like</dt>
+                    <dd>La somma dei like e dislike dei tuoi post.</dd>
+                </div>
+                <div class="statistics-index__item">
+                    <dt>Attività giorno per giorno</dt>
+                    <dd>Una statistica dei messaggi pubblicati ogni giorno.</dd>
+                </div>
+                <div class="statistics-index__item">
+                    <dt>Topic più frequentato</dt>
+                    <dd>Il topic in cui hai pubblicato più messaggi.</dd>
+                </div>
+                <div class="statistics-index__item">
+                    <dt>Post con più like</dt>
+                    <dd>Il tuo post con il numero di like più alto.</dd>
+                </div>
+            </dl>
+        </aside>
+    </section>
+
+    <section class="how-it-works" id="come-funziona" aria-labelledby="how-it-works-title">
+        <div class="section-intro">
+            <h2 id="how-it-works-title">Dal profilo al tuo wrap-up</h2>
+            <p>Verifichiamo che il profilo sul Nill Forum sia tuo prima di associare i tuoi post al riepilogo.</p>
+        </div>
+
+        <ol class="verification-steps">
+            <li class="verification-step">
+                <h3>Inserisci il tuo MID</h3>
+                <p>Il MID è l'identificativo uivoco del tuo profilo sul circuito ForumCommunity. In questo modo sarà possibile identificarti.</p>
+            </li>
+            <li class="verification-step">
+                <h3>Verifica che il profilo sia tuo</h3>
+                <p>Aggiungi alla sezione Contatti del tuo profilo sul Nill Forum il codice temporaneo che ti mostreremo in fase di registrazione. In questo modo sarà possibile verificare che il profilo appartenga a te.</p>
+            </li>
+            <li class="verification-step">
+                <h3>Consulta il riepilogo del tuo anno</h3>
+                <p>Quando il riepilogo dell'anno è disponibile, accedi per consultarlo e scaricare il tuo wrap-up!</p>
+            </li>
+        </ol>
+    </section>
+
+    <section class="privacy-note" aria-labelledby="privacy-title">
+        <h2 id="privacy-title">Un riepilogo sul tuo anno</h2>
+        <p>Il wrap-up mostra i dati dei tuoi post. Condividilo con gli altri utenti dopo averlo scaricato!</p>
+    </section>
+
+    <section class="closing-note" aria-labelledby="closing-title">
+        <h2 id="closing-title">Scopri com’è stato il tuo anno sul Nill Forum.</h2>
+        <a class="action-link" href="/Account/Register">Inizia la registrazione</a>
+    </section>
 </div>
