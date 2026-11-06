@@ -83,8 +83,11 @@ public sealed class AccountLoginTests
         Assert.Contains("samesite=lax", sessionCookie);
 
         string home = await client.GetStringAsync("/");
-        Assert.Contains("Ciao,", home);
-        Assert.Contains("Nill Member", home);
+        Assert.Contains("account-menu", home);
+        Assert.Contains("Il mio wrap-up", home);
+        Assert.Contains(">Esci</button>", home);
+        Assert.DoesNotContain("Ciao,", home);
+        Assert.DoesNotContain("Nill Member", home);
         Assert.DoesNotContain("data-login-trigger", home);
         Assert.DoesNotContain(">Registrati</a>", home);
         Assert.Contains("no-store", login.Headers.CacheControl!.ToString());
@@ -192,7 +195,7 @@ public sealed class AccountLoginTests
     }
 
     [Fact]
-    public async Task MissingNicknameUsesMidAndDeactivationRevokesTheSession()
+    public async Task MissingNicknameIsNotShownAndDeactivationRevokesTheSession()
     {
         await using var application = new LoginWebApplicationFactory();
         await application.SeedAccountsAsync();
@@ -200,7 +203,10 @@ public sealed class AccountLoginTests
         using HttpResponseMessage login = await LoginAsync(client, "789", LoginWebApplicationFactory.Password);
         Assert.Equal(HttpStatusCode.Redirect, login.StatusCode);
         string home = await client.GetStringAsync("/");
-        Assert.Contains("MID 789", home);
+        Assert.Contains("Il mio wrap-up", home);
+        Assert.Contains(">Esci</button>", home);
+        Assert.DoesNotContain("Ciao,", home);
+        Assert.DoesNotContain("MID 789", home);
 
         using IServiceScope scope = application.Services.CreateScope();
         ForumWrapUpDbContext database = scope.ServiceProvider.GetRequiredService<ForumWrapUpDbContext>();

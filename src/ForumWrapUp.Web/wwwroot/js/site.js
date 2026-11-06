@@ -2,6 +2,19 @@
     const dialog = document.querySelector("#login-dialog");
     const trigger = document.querySelector("[data-login-trigger]");
     const form = document.querySelector("[data-login-form]");
+    const accountMenu = document.querySelector("[data-account-menu]");
+
+    if (accountMenu) {
+        document.addEventListener("click", (event) => {
+            if (event.target instanceof Node && !accountMenu.contains(event.target)) accountMenu.open = false;
+        });
+
+        accountMenu.addEventListener("keydown", (event) => {
+            if (event.key !== "Escape" || !accountMenu.open) return;
+            accountMenu.open = false;
+            accountMenu.querySelector("summary").focus();
+        });
+    }
 
     if (!form) return;
 
