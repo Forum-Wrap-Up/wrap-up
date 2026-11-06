@@ -51,6 +51,26 @@ Le date dei post sono archiviate in UTC. La conversione al giorno locale `Europe
 
 L'API amministrativa `POST /api/admin/imports` accoda l'importazione raw per MID e intervallo (`fromDate`/`toDate`, formato `YYYY-MM-DD`) e restituisce `202 Accepted` con l'ID e l'URL per consultare lo stato. `GET /api/admin/imports/{operationId}` restituisce stato e progresso. Le date sono inclusive nel fuso `Europe/Rome`; il worker è eseguito nella stessa applicazione e processa una sola operazione alla volta. Questa fase non genera le aggregazioni annuali. Il profilo ForumFree viene acquisito durante l'importazione dei post solo se il profilo locale non è ancora stato sincronizzato.
 
+`POST /api/admin/wrap-ups/{mid}/{year}/generate` genera e persiste sincronicamente le aggregazioni annuali per un MID; non richiede un body. Il `200 OK` viene restituito dopo il salvataggio e include conteggi, topic più frequente, post con più points e data di calcolo, ad esempio:
+
+```json
+{
+  "mid": 123,
+  "year": 2026,
+  "totalPosts": 120,
+  "totalPoints": 88,
+  "topTopicExternalId": 42,
+  "topTopicPostCount": 17,
+  "mostSuccessfulPostExternalId": 1337,
+  "mostSuccessfulPostPoints": 12,
+  "calculatedAtUtc": "2026-11-06T15:00:00Z"
+}
+```
+
+L'anno deve essere configurato, ma può essere disabilitato. Per impostazione predefinita la generazione richiede importazioni riuscite che coprano l'intero anno; intervalli adiacenti o sovrapposti sono cumulabili. Importazioni in coda o in esecuzione per lo stesso MID e anno producono sempre `409 Conflict`; con il controllo di copertura attivo, anche una copertura incompleta produce `409 Conflict`. MID o anno non configurati producono `404 Not Found`; MID non positivo o anno non compreso tra 1 e 9998 producono `400 Bad Request`.
+
+Il controllo è regolato da `AnnualWrapUpGeneration:RequireFullYearImportCoverage`: è `true` per impostazione predefinita in `appsettings.json` e `false` in `appsettings.Development.json`. Può essere sovrascritto, ad esempio con la variabile d'ambiente `AnnualWrapUpGeneration__RequireFullYearImportCoverage`. Se disattivato, il riepilogo è calcolato sui post attualmente importati e i giorni senza post presenti nel database risultano a zero, anche se parte dell'anno non è stata importata. Il controllo degli import in coda o in esecuzione rimane attivo.
+
 Configurare `ForumApi:ForumUri` con l'URI assoluto della root del forum e, facoltativamente, `ForumApi:MaximumPageDelay` con un intervallo massimo (formato `TimeSpan`, ad esempio `00:05:00`). Il cookie è letto dal provider `IForumApiCookieProvider` tramite la chiave di configurazione `ForumApi:Cookie`. In sviluppo, WebApplication carica .NET User Secrets quando l'ambiente è `Development`; impostare il valore senza inserirlo nei file versionati:
 
 ```powershell

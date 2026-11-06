@@ -19,6 +19,8 @@ public sealed class Program
         builder.Services.AddControllersWithViews();
         IConfigurationSection loginFormSection = builder.Configuration.GetSection("LoginForm");
         builder.Services.Configure<LoginFormOptions>(loginFormSection);
+        builder.Services.Configure<AnnualWrapUpGenerationOptions>(
+            builder.Configuration.GetSection(AnnualWrapUpGenerationOptions.SectionName));
         builder.Services.AddForumWrapUpImporting(builder.Configuration);
         builder.Services.AddSingleton<IForumApiCookieProvider, ConfigurationForumApiCookieProvider>();
         builder.Services.AddAdminApiAuthentication(builder.Configuration);
@@ -27,6 +29,7 @@ public sealed class Program
         builder.Services.AddSingleton<IPasswordHasher<UserAccount>, PasswordHasher<UserAccount>>();
         builder.Services.AddScoped<UserAccountService>();
         builder.Services.AddScoped<WrapUpYearService>();
+        builder.Services.AddScoped<AnnualWrapUpGenerationService>();
 
         string? connectionString = builder.Configuration.GetConnectionString("ForumWrapUp");
         if (!string.IsNullOrWhiteSpace(connectionString))

@@ -2,8 +2,6 @@ namespace ForumWrapUp.Importing;
 
 public sealed record ForumImportDateRange
 {
-    private static readonly TimeZoneInfo RomeTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Europe/Rome");
-
     public ForumImportDateRange(DateTime fromUtc, DateTime toUtcExclusive)
     {
         FromUtc = fromUtc;
@@ -25,8 +23,8 @@ public sealed record ForumImportDateRange
         DateTime fromLocal = fromDate.ToDateTime(TimeOnly.MinValue, DateTimeKind.Unspecified);
         DateOnly dayAfterToDate = toDate.AddDays(1);
         DateTime toLocalExclusive = dayAfterToDate.ToDateTime(TimeOnly.MinValue, DateTimeKind.Unspecified);
-        DateTime fromUtc = TimeZoneInfo.ConvertTimeToUtc(fromLocal, RomeTimeZone);
-        DateTime toUtcExclusive = TimeZoneInfo.ConvertTimeToUtc(toLocalExclusive, RomeTimeZone);
+        DateTime fromUtc = ForumLocalTime.ToUtc(fromLocal);
+        DateTime toUtcExclusive = ForumLocalTime.ToUtc(toLocalExclusive);
 
         return new ForumImportDateRange(fromUtc, toUtcExclusive);
     }
